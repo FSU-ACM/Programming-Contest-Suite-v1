@@ -26,3 +26,13 @@
 #### Prototype Progress
 
 	Pair and group programming today to get a basic version up an running.
+
+#### Edge Cases
+
+	* Non-FSU students check a box to bypass required last four FSU Card Number intro
+
+	* If sign-in fails; enter email adress.
+
+	* Sign-in will assume that entrant is a student.
+
+	* Non-student/faculty entrants will be asked to enter their email adress to sign in.
