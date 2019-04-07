@@ -2,7 +2,22 @@
 ## Hayden Rogers
 ## 4/7/2019
 
-CREATE TABLE Account (
+CREATE TABLE PCS.Admin (
+	AdminID int,
+	FirstName varchar(255)
+	LastName varchar(255)
+	PRIMARY KEY (AdminID)
+);
+
+CREATE TABLE PCS.Faculty (
+	FacultyID int,
+	FirstName varchar(255),
+	LastName varchar(255),
+	Email varchar(255),
+	PRIMARY KEY (FacultyID)
+);
+
+CREATE TABLE PCS.Account (
 	AccountID int,
 	Role varchar(255),
 	FirstName varchar(255),
@@ -14,25 +29,17 @@ CREATE TABLE Account (
 	TeamID int,
 	PRIMARY KEY (AccountID),
 	FOREIGN KEY (CourseID) REFERENCES Course(CourseID)
-)
+);
 
-CREATE TABLE Course (
+CREATE TABLE PCS.Course (
 	CourseID int,
 	CourseName varchar(255),
 	FacultyID int,
 	PRIMARY KEY (CourseID),
 	FOREIGN KEY (FacultyID) REFERENCES Faculty(FacultyID)
-)
+);
 
-CREATE TABLE Faculty (
-	FacultyID int,
-	FirstName varchar(255),
-	LastName varchar(255),
-	Email varchar(255),
-	PRIMARY KEY (FacultyID)
-)
-
-CREATE TABLE Team (
+CREATE TABLE PCS.Team (
 	TeamID int,
 	TeamName varchar(255),
 	Division varchar(255),
@@ -41,11 +48,5 @@ CREATE TABLE Team (
 	Members varchar(1000),
 	PRIMARY KEY (TeamID),
 	FOREIGN KEY (LeaderID) REFERENCES Account(AccountID)
-)
+);
 
-CREATE TABLE Admin (
-	AdminID int,
-	FirstName varchar(255)
-	LastName varchar(255)
-	PRIMARY KEY (AdminID)
-)
