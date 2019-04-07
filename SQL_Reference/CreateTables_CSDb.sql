@@ -37,7 +37,10 @@ CREATE TABLE Team (
 	TeamName varchar(255),
 	Division varchar(255),
 	TeamPassword varchar (255),
-	PRIMARY KEY (TeamID)
+	LeaderID int,
+	Members varchar(1000),
+	PRIMARY KEY (TeamID),
+	FOREIGN KEY (LeaderID) REFERENCES Account(AccountID)
 )
 
 CREATE TABLE Admin (
