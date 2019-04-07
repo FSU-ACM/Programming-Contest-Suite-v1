@@ -1,7 +1,7 @@
 ## Meeting Notes
 ### 4/6/2019
 
-#### Entity Class Diatgram
+#### Entity Class Diagram
 
 	In progress -- almost done
 

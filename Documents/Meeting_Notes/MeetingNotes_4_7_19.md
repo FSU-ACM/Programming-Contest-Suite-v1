@@ -11,7 +11,7 @@
 
 	Subs and JUUL Pods for everyone.
 
-#### Entity Class Diatgram
+#### Entity Class Diagram
 
 	Almost complete -- pending final meeting with Sonia in class on Monday.
 
