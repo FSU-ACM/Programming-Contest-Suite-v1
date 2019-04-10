@@ -38,16 +38,12 @@ class QuickForm(forms.Form):
         widget=forms.TextInput(attrs={'placeholder': 'Last 8 Digits on myFSU Card'})
     )
 
-    Division = forms.ChoiceField(choices=DIVISION)
+    Division = forms.ChoiceField(choices=DIVISION, required=True)
     Role = forms.ChoiceField(choices=ROLE)
     Email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
     Password = forms.CharField(widget=forms.PasswordInput())
 
     def save(self, req):
-        exist = Account.objects.filter(Email=req['Email'])
-        if not exist:
-            return
-    
         user = Account(
             FirstName=req['FirstName'],
             LastName=req['LastName'],
