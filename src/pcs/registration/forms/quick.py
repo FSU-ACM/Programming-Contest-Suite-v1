@@ -7,7 +7,7 @@ DIVISION = (
 
 ROLE = (
     ('P', 'Participant'),
-    ('Q', 'Qeustion Writer'),
+    ('Q', 'Question Writer'),
     ('V', 'Volunteer')
 )
 
@@ -15,7 +15,7 @@ ROLE = (
 class QuickForm(forms.Form):
     TeamName = forms.CharField(
         label='Team Name',
-        widget=froms.TextInput(attrs={'placeholder': 'Team Name'})
+        widget=forms.TextInput(attrs={'placeholder': 'Team Name'})
     )
 
     FirstName = forms.CharField(
@@ -35,10 +35,12 @@ class QuickForm(forms.Form):
 
     FsuNum = forms.CharField(
         label='FSU Number',
-        widget=forms.TextInput(attrs={'placeholder': 'Last 8 Digits on myFSU Card'})
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Last 8 Digits on myFSU Card'})
     )
 
     Division = forms.ChoiceField(choices=DIVISION)
     Role = forms.ChoiceField(choices=ROLE)
-    Email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
+    Email = forms.EmailField(widget=forms.EmailInput(
+        attrs={'placeholder': 'Email'}))
     Password = forms.CharField(widget=forms.PasswordInput())
