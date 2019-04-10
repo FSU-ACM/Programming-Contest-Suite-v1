@@ -11,3 +11,50 @@
         <link rel="stylesheet" type="text/css" href="{% static 'registration/css/index.css' %}"/>
         <link rel="icon" sizes="16x16 32x32 64x64" href="{% static 'registration/img/favicon.ico' %}"/>
     </head>
+    <body>
+        <div class="k_container">
+            <header>
+                <nav class="navbar">
+                    <div class="logo">
+                        <img src="{% static 'registration/img/logo.png' %}" width="75" height="75">
+                    </div>
+                    <div class="fsu">
+                        <img src="{% static 'registration/img/fsu.png' %}" width="340" height="45">
+                    </div>
+                    <div class="menu-icon">
+                        <div class="inner" id="mobile"></div>
+                    </div>
+                    <div class="menu">
+                        <ul>
+                            <li><a href="{% url 'home' %}">Home</a></li>
+                            <li><a href="{% url 'dispatch' %}">Register</a></li>
+                            <li><a href="google.com">About</a></li>
+                            <li><a href="google.com">Contact</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="hero">
+                <div class="to-content">
+                    <i class="arrow down"></i>
+                </div>
+            </div>
+
+            <div class="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+            <footer>
+                <div class="footerWrap">
+                    <a href="https://www.facebook.com/ACMatFSU/"><i class="fab fa-facebook-square"></i></a>
+                    <a href="https://discord.gg/DeKFzS4"><i class="fab fa-discord"></i></a>
+                    <a href="https://github.com/FSU-ACM"><i class="fab fa-github"></i></a>
+                    <a href="mailto:contact@fsu.acm.org"><i class="fas fa-envelope"></i></a>
+                    <h3>Copyright © 2019 FSU ACM Student Chapter</h3>
+                </div>
+            </footer>
+        </div>
+        <script src="{% static 'registration/js/common.js' %}"></script>
+    </body>
+</html>
