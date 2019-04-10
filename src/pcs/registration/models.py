@@ -26,15 +26,15 @@ class Account(models.Model):
     """
     """
     AccountID = models.AutoField(primary_key=True)
-    Role = models.CharField(max_length=30)
+    Role = models.CharField(max_length=30, null=True)
     FirstName = models.CharField(max_length=30)
     LastName = models.CharField(max_length=30)
     FsuNum = models.CharField(max_length=10)
     FsuID = models.CharField(max_length=10)
     Email = models.CharField(max_length=30)
     Password = models.CharField(max_length=60)
-    Team = models.ForeignKey('Team', on_delete=models.CASCADE)
-    Course = models.ForeignKey('Course', on_delete=models.CASCADE)
+    Team = models.ForeignKey('Team', on_delete=models.CASCADE, null=True)
+    Course = models.ForeignKey('Course', on_delete=models.CASCADE, null=True)
 
 class Team(models.Model):
     """
@@ -47,5 +47,5 @@ class Team(models.Model):
     Division = models.CharField(max_length=1, 
                                 choices=DivisionChoices)
     Password = models.CharField(max_length=60)
-    Leader = models.ForeignKey('Account', on_delete=models.CASCADE)
+    Leader = models.OneToOneField('Account', on_delete=models.CASCADE)
     Members = models.CharField(max_length=150)
