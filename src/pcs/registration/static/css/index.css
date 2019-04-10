@@ -19,7 +19,7 @@ body {
 
 .container {
     position: relative !important;
-    top: 5em !important;
+    top: 3.5em !important;
 }
   
 header {
@@ -34,8 +34,12 @@ header {
 
 nav {
     position: relative;
+    display: inherit !important;
     background-color: #782f40;
     overflow: hidden;
+    padding: inherit !important;
+    min-height: 80px;
+
 }
 
 nav .menu {
@@ -59,7 +63,7 @@ nav ul li a {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     outline: none;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 nav ul li a:link,
@@ -67,8 +71,14 @@ nav ul li a:visited {
     color: #e4e4e4;
 }
 
+nav ul li a:hover,
+nav ul li a:active,
 nav ul li a.current {
     border-bottom: 1px solid #e4e4e4 !important;
+}
+
+ul {
+    margin-top: .5em !important;
 }
 
 .logo,
@@ -178,6 +188,17 @@ footer .footerWrap {
 
 .asteriskField {
     display: none;
+}
+
+.btn-outline-danger {
+    color: #782f40 !important;
+    border-color: #782f40 !important;
+}
+
+.btn-outline-danger:hover {
+    background-color: #782f40 !important;
+    border-color: #782f40 !important;
+    color: #e4e4e4 !important;
 }
 
 @media(max-width: 1100px) {
