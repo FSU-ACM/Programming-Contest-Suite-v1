@@ -14,10 +14,8 @@ def home(req):
 
 def submit(req):
     form = QuickForm(req.POST)
-    """
     if not form.is_valid():
         return TemplateResponse(req, 'register.html', {'form': form})
     else:
-    """
-    form.save(req.POST)
-    return TemplateResponse(req, 'base.html', {})
+        form.finalize()
+        return TemplateResponse(req, 'base.html', {})
