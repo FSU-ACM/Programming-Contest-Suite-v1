@@ -1,16 +1,6 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from registration.models import Account, Team
-
-DIVISION = (
-        ('L', 'Lower Division'),
-        ('U', 'Upper Division')
-    )
-
-ROLE = (
-    ('P', 'Participant'),
-    ('Q', 'Question Writer'),
-    ('V', 'Volunteer')
-)
 
 class QuickForm(forms.Form):
     TeamName = forms.CharField(
@@ -34,38 +24,58 @@ class QuickForm(forms.Form):
     )
 
     FsuNum = forms.CharField(
+        max_length=8,
+        min_length=8,
         label='FSU Number',
-        widget=forms.TextInput(attrs={'placeholder': 'Last 8 Digits on myFSU Card'})
+        widget=forms.TextInput(attrs={'placeholder': 'Last 8 Digits of myFSU Card'})
     )
 
-    Division = forms.ChoiceField(choices=DIVISION, required=True)
-    Role = forms.ChoiceField(choices=ROLE)
+    Division = forms.ChoiceField(widget=forms.RadioSelect(), choices=Team.DIVISION, required=True)
+    Role = forms.ChoiceField(widget=forms.RadioSelect(), choices=Account.ROLE, required=True)
     Email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
     Password = forms.CharField(widget=forms.PasswordInput())
 
-    def save(self, req):
-        user = Account(
-            FirstName=req['FirstName'],
-            LastName=req['LastName'],
-            Email=req['Email'],
-            FsuID=req['FsuID'],
-            FsuNum=req['FsuNum'],
-            Password=req['Password']
-        )
+    def __init__(self, req=None):
+        super().__init__()
+        if req is not None:
+            self.FirstName=req['FirstName']
+            self.LastName=req['LastName']
+            self.FsuID=req['FsuID']
+            self.FsuNum=req['FsuNum']
+            self.Email=req['Email']
+            self.Password=req['Password']
+            self.TeamName=req['TeamName']
+            self.Division=req['Division']
+
+    def validUser(self):
+        if Account.objects.get(Email=self.Email) is not None:
+            raise ValidationError(('User already exists'), code='exists')
+        else:
+            return True
         
-        user.save()
-        newUser = Account.objects.get(Email=user.Email)
+    def finalize(self):
+        if self.validUser():
+            newUser = Account(
+                FirstName=self.FirstName,
+                LastName=self.LastName,
+                Email=self.Email,
+                FsuID=self.FsuID,
+                FsuNum=self.FsuNum,
+                Password=self.Password
+            )
+            newUser.save()
+            newUser = Account.objects.get(Email=self.Email)
 
-        team = Team(
-            TeamName=req['TeamName'],
-            Division=req['Division'],
-            Leader_id=newUser.AccountID
-        )
-        team.save()
+            newTeam = Team(
+                TeamName=self.TeamName,
+                Division=self.Division,
+                Leader_id=newUser.AccountID
+            )
+            newTeam.save()
 
-        newTeam = Team.objects.get(Leader_id=newUser.AccountID)
-        newUser.Team_id = newTeam.TeamID
-        newUser.save()
+            newTeam = Team.objects.get(Leader_id=newUser.AccountID)
+            newUser.Team_id = newTeam.TeamID
+            newUser.save()
 
     
     
