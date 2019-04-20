@@ -50,8 +50,8 @@ function calcHeight() {
         document.querySelector('div.hero').style.height = String(window.innerHeight - navHeight) + 'px';
     }
 
-    if (window.location.pathname.includes('/registration')) {
-        document.querySelector('div.content').style.height = String(window.innerHeight - navHeight - footerHeight + 180) + 'px';
+    if (window.location.pathname.includes('/registration') || window.location.pathname.includes('/login')) {
+        document.querySelector('div.content').style.height = String(window.innerHeight - navHeight - footerHeight + 250) + 'px';
     }
     else {
         document.querySelector('div.content').style.height = String(window.innerHeight - navHeight - footerHeight + 1) + 'px';
