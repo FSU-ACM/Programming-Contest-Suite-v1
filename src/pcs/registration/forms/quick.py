@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from bcrypt import hashpw, gensalt
+from utility.auth import *
 from registration.models import Account, Team
 
 class QuickForm(forms.Form):
@@ -35,15 +36,9 @@ class QuickForm(forms.Form):
     Role = forms.ChoiceField(widget=forms.RadioSelect(), choices=Account.ROLE, required=True)
     Email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
     Password = forms.CharField(widget=forms.PasswordInput())
-
-    def validUser(self, req):
-        if Account.objects.get(Email=req['Email']) is not None:
-            raise ValidationError(('User already exists'), code='exists')
-        else:
-            return True
         
     def finalize(self, req):
-        if self.validUser(req.POST):
+        if !userExists(req.POST):
             newUser = Account(
                 FirstName=req['FirstName'],
                 LastName=req['LastName'],
