@@ -38,7 +38,7 @@ class QuickForm(forms.Form):
     Password = forms.CharField(widget=forms.PasswordInput())
         
     def finalize(self, req):
-        if !userExists(req.POST):
+        if not userExists(req.POST):
             newUser = Account(
                 FirstName=req['FirstName'],
                 LastName=req['LastName'],
