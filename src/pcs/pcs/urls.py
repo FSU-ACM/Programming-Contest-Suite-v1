@@ -25,7 +25,7 @@ from checkin import views
 
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='base.html'), name='home'),
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('registration/', views.register, name='register'),
     path('login/', views.login, name='login'),
     path('admin/', admin.site.urls),
