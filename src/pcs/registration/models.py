@@ -49,13 +49,14 @@ class Account(models.Model):
     )
 
     AccountID = models.AutoField(primary_key=True)
-    Role = models.CharField(max_length=1, choices=ROLE)
+    Role = models.CharField(max_length=1, choices=ROLE, null=True)
     FirstName = models.CharField(max_length=30)
     LastName = models.CharField(max_length=30)
     FsuNum = models.CharField(max_length=10)
     FsuID = models.CharField(max_length=10)
     Email = models.CharField(max_length=30)
     Password = models.CharField(max_length=60)
+    isSignedIn = models.BooleanField(default=False)
     Team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True)
     Course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
 
