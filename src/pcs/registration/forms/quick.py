@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from bcrypt import hashpw, gensalt
 from registration.models import Account, Team
 
 class QuickForm(forms.Form):
@@ -35,47 +36,34 @@ class QuickForm(forms.Form):
     Email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
     Password = forms.CharField(widget=forms.PasswordInput())
 
-    def __init__(self, req=None):
-        super().__init__()
-        if req is not None:
-            self.FirstName=req['FirstName']
-            self.LastName=req['LastName']
-            self.FsuID=req['FsuID']
-            self.FsuNum=req['FsuNum']
-            self.Email=req['Email']
-            self.Password=req['Password']
-            self.TeamName=req['TeamName']
-            self.Division=req['Division']
-
-    def validUser(self):
-        if Account.objects.get(Email=self.Email) is not None:
+    def validUser(self, req):
+        if Account.objects.get(Email=req['Email']) is not None:
             raise ValidationError(('User already exists'), code='exists')
         else:
             return True
         
-    def finalize(self):
-        if self.validUser():
+    def finalize(self, req):
+        if self.validUser(req.POST):
             newUser = Account(
-                FirstName=self.FirstName,
-                LastName=self.LastName,
-                Email=self.Email,
-                FsuID=self.FsuID,
-                FsuNum=self.FsuNum,
-                Password=self.Password
+                FirstName=req['FirstName'],
+                LastName=req['LastName'],
+                FsuID=req['FsuID'],
+                FsuNum=req['FsuNum'],
+                Email=req['Email'],
+                Password=hashpw(req['Password'], gensalt()),
             )
-            newUser.save()
-            newUser = Account.objects.get(Email=self.Email)
+            newUser.save(commit=False)
 
             newTeam = Team(
-                TeamName=self.TeamName,
-                Division=self.Division,
+                TeamName=req['TeamName'],
+                Division=req['Division'],
                 Leader_id=newUser.AccountID
             )
-            newTeam.save()
+            newTeam.save(commit=False)
 
-            newTeam = Team.objects.get(Leader_id=newUser.AccountID)
             newUser.Team_id = newTeam.TeamID
             newUser.save()
+            newTeam.save()
 
     
     
