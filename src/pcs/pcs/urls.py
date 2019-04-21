@@ -21,7 +21,7 @@ from django.urls import path
 from django.views.generic.base import TemplateView
 #should we import the two views as seperate names to avoid possible conflicts in future?
 from registration import views
-from checkin import views
+#from checkin import views
 
 
 urlpatterns = [
