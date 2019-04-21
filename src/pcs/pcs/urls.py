@@ -19,7 +19,9 @@ from django.views.generic.base import TemplateView
 from django.contrib import admin
 from django.urls import path
 from django.views.generic.base import TemplateView
+#should we import the two views as seperate names to avoid possible conflicts in future?
 from registration import views
+from checkin import views
 
 
 urlpatterns = [
@@ -27,5 +29,6 @@ urlpatterns = [
     path('registration/', views.register, name='register'),
     path('login/', views.login, name='login'),
     path('admin/', admin.site.urls),
-   # path('profile/', views.profile, name='profile'),
+    #path('profile/', views.profile, name='profile'),
+    #path('checkin/', views.checkin, name='checkin'),
 ]
