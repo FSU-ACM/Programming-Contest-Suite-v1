@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from registration.models import Account
 from registration.utility import auth
 
-class CheckinForm(forms.Form):
+class emailCheckinForm(forms.Form):
     Email = forms.EmailField(widget=forms.EmailInput(
         attrs={'placeholder': 'Email'}))
 
@@ -13,9 +13,14 @@ class CheckinForm(forms.Form):
         # userExists will check that user is in db
         # if they don't match or are not in the db an error will
         # display and the user will have to try again.
-        if auth.userExists(req.POST):
+        if auth.userExists(req):
             # mark user at checked in
-            checkedIn = True
+            user = auth.getUser(req)
+            user.isSignedIn = True
+            user.save()
+            return True
+
         else:
-            raise ValidationError(
-                ('This email '), code='notexits')
+            return False
+            #raise ValidationError(
+                #('This email '), code='notexits')
