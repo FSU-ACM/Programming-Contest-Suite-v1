@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from bcrypt import hashpw, gensalt
-from utility.auth import *
+from registration.utility.auth import *
 from registration.models import Account, Team
 
 class QuickForm(forms.Form):
@@ -59,6 +59,5 @@ class QuickForm(forms.Form):
             newUser.Team_id = newTeam.TeamID
             newUser.save()
             newTeam.save()
-
     
     
