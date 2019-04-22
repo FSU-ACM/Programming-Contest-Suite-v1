@@ -7,7 +7,7 @@
     <div class="jumbotron">
         <div class="row">
             <div class="col-md-6 mx-auto">
-                <h1 class="h2 mb-5 font-weight-normal text-center">Checkin</h1>
+                <h1 class="h2 mb-5 font-weight-normal text-center">Check-In</h1>
                 <form noValidate method="post">
                     {% csrf_token %}
                     <div class="form-row">
@@ -15,7 +15,7 @@
                             {{ form.Email | as_crispy_field }}
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-outline-danger btn-block">Checkin</button>
+                    <button type="submit" class="btn btn-lg btn-outline-danger btn-block">Submit</button>
                 </form>
             </div>
         </div>
