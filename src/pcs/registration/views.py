@@ -1,8 +1,5 @@
 from django.shortcuts import render
 from registration.forms.quick import QuickForm
-from django.shortcuts import render
-from registration.forms.quick import QuickForm
-
 
 def register(req):
     if req.method == 'POST':
