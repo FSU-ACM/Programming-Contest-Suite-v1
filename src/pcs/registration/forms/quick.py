@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from bcrypt import hashpw, gensalt
+from registration.utility.auth import userExists 
 from registration.models import Account, Team
 
 class QuickForm(forms.Form):
@@ -32,38 +33,30 @@ class QuickForm(forms.Form):
     )
 
     Division = forms.ChoiceField(widget=forms.RadioSelect(), choices=Team.DIVISION, required=True)
-    Role = forms.ChoiceField(widget=forms.RadioSelect(), choices=Account.ROLE, required=True)
+    Role = forms.ChoiceField(widget=forms.RadioSelect(), choices=Account.ROLE, required=False)
     Email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
     Password = forms.CharField(widget=forms.PasswordInput())
-
-    def validUser(self, req):
-        if Account.objects.get(Email=req['Email']) is not None:
-            raise ValidationError(('User already exists'), code='exists')
-        else:
-            return True
         
     def finalize(self, req):
-        if self.validUser(req.POST):
+        if not userExists(req):
             newUser = Account(
                 FirstName=req['FirstName'],
                 LastName=req['LastName'],
                 FsuID=req['FsuID'],
                 FsuNum=req['FsuNum'],
                 Email=req['Email'],
-                Password=hashpw(req['Password'], gensalt()),
+                Password=hashpw(str(req['Password']).encode('utf8'), gensalt()),
             )
-            newUser.save(commit=False)
 
+            newUser.save()        
             newTeam = Team(
                 TeamName=req['TeamName'],
                 Division=req['Division'],
                 Leader_id=newUser.AccountID
             )
-            newTeam.save(commit=False)
-
+            
+            newTeam.save()
             newUser.Team_id = newTeam.TeamID
             newUser.save()
-            newTeam.save()
-
     
     

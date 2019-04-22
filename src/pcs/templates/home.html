@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 {% block home %}
 
-
-<div class="container rounded-lg py-auto">
+<div class="container col-md-8 rounded-lg py-5">
         <div class="jumbotron">
 
-                <div class="row">
+                <div class="row mx-5">
                         <h3>ACM's Programming Contest </h3>
                         <p>
                             The ACM Programming Contest is a coding competition that emphasizes
@@ -24,29 +23,21 @@
                         </p>
                 </div>
 
-            <div class="row">
-                <div class="col-md-6 mx-auto">
+            <div class="row mt-5">
+                <div class="col-md-4 m-auto p-2">
 
                         <form action="{% url 'register' %}">
-                            <input type="submit" class="btn btn-lg btn-outline-danger btn-block btn-alt" value="Register for Contest" />
+                            <input type="submit" class="btn btn-lg btn-outline-danger btn-block btn-alt" value="Register" />
                         </form>
 
                 </div>
-                <div class="col-md-6 mx-auto">
+                <div class="col-md-4 m-auto p-2">
                         <form action="{% url 'login' %}">
-                                <input type="submit" class="btn btn-lg btn-outline-danger btn-block btn-alt" value="Existing User Login" />
+                                <input type="submit" class="btn btn-lg btn-outline-danger btn-block btn-alt" value="Login" />
                         </form>
                 </div>
             </div>
 
-
         </div>
 </div>
-
-
-
-
-
-
-
 {% endblock %}

@@ -4,7 +4,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from bcrypt import hashpw, gensalt
 from registration.models import Account
-from registration.utility import auth
+from registration.utility.auth import checkPass, userExists
 
 
 class LoginForm(forms.Form):
@@ -18,10 +18,12 @@ class LoginForm(forms.Form):
         # password matches that user.
         # if they don't match or are not in the db an error will
         # display and the user will have to try again.
-        if auth.checkPass(req.POST):
+        if userExists(req) and checkPass(req):
             # log user in to system
             # dummy statement
-            loggedIn = True
+            return True
         else:
-            raise ValidationError(
-                ('User/Password are not correct'), code='notexits')
+            raise ValidationError(('User/Password are not correct'), code='notexits')
+    
+    #def login(self, req):
+

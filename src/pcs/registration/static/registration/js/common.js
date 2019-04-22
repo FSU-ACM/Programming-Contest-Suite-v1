@@ -44,18 +44,23 @@ function heroClickEvent() {
 
 function calcHeight() {
     let navHeight = document.querySelector('header').getBoundingClientRect().height,
-        footerHeight= document.querySelector('footer').getBoundingClientRect().height;
+        footerHeight = document.querySelector('footer').getBoundingClientRect().height,
+        container = document.querySelector('div.container'),
+        containerStyle = window.getComputedStyle(container);
+    
+    let containerHeight = ['height', 'padding-top', 'padding-bottom', 'margin-top', 'margin-bottom']
+        .map((key) => {
+            parseInt(containerStyle.getPropertyValue(key), 10)
+        })
+        .reduce((prev, curr) => {
+            prev + curr
+        });
 
-    if (window.location.pathname == '/') {
+    if (window.location.pathname == '/')
         document.querySelector('div.hero').style.height = String(window.innerHeight - navHeight) + 'px';
-    }
+    else 
+        document.querySelector('div.content').style.height = String(window.innerHeight) + 'px';
 
-    if (window.location.pathname.includes('/registration') || window.location.pathname.includes('/login')) {
-        document.querySelector('div.content').style.height = String(window.innerHeight - navHeight - footerHeight + 250) + 'px';
-    }
-    else {
-        document.querySelector('div.content').style.height = String(window.innerHeight - navHeight - footerHeight + 1) + 'px';
-    }
 };
 
 function addCurrent() {

@@ -55,7 +55,7 @@ class Account(models.Model):
     FsuNum = models.CharField(max_length=10)
     FsuID = models.CharField(max_length=10)
     Email = models.CharField(max_length=30)
-    Password = models.CharField(max_length=60)
+    Password = models.CharField(max_length=250)
     isSignedIn = models.BooleanField(default=False)
     Team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True)
     Course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
