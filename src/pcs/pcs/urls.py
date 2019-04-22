@@ -20,8 +20,8 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic.base import TemplateView
 #should we import the two views as seperate names to avoid possible conflicts in future?
-from registration import regViews
-from checkin import checkViews
+from registration import views as regViews
+from checkin import views as checkViews
 
 
 urlpatterns = [
