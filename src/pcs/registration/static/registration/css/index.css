@@ -201,6 +201,12 @@ footer .footerWrap {
     color: #e4e4e4 !important;
 }
 
+.btn-alt {
+    background-color: #CEB888;
+    border-color: #CEB888;
+
+}
+
 @media(max-width: 1100px) {
 
     .fsu, .fsu-hide {
