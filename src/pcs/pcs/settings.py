@@ -129,3 +129,10 @@ STATICFILES_DIR = [
     os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'registration/static/registration')
 ]
+
+# Configure Email Host Server
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'fsu.acm.org'
+EMAIL_HOST_USER = 'contest@fsu.acm.org'
+EMAIL_HOST_PASSWORD = 'contestACM1017!'
+EMAIL_PORT = 465
