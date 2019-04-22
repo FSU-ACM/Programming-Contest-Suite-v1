@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from bcrypt import hashpw, gensalt
-from registration.utility.auth import *
+from registration.utility.auth import userExists 
 from registration.models import Account, Team
 
 class QuickForm(forms.Form):
