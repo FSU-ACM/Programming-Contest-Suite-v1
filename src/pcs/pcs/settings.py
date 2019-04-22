@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import email
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -132,8 +131,8 @@ STATICFILES_DIR = [
 ]
 
 # Configure Email Host Server
-EMAIL_USE_TLS = email.tls
-EMAIL_HOST = email.host
-EMAIL_HOST_USER = email.user
-EMAIL_HOST_PASSWORD = email.password
-EMAIL_PORT = email.port
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'fsu.acm.org'
+EMAIL_HOST_USER = 'contest@fsu.acm.org'
+EMAIL_HOST_PASSWORD = 'contestACM1017!'
+EMAIL_PORT = 465
