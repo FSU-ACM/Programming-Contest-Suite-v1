@@ -49,16 +49,18 @@ function calcHeight() {
         containerStyle = window.getComputedStyle(container);
     
     let containerHeight = ['height', 'padding-top', 'padding-bottom', 'margin-top', 'margin-bottom']
-        .map((key) => parseInt(containerStyle.getPropertyValue(key), 10))
-        .reduce((prev, curr) => prev + curr);
+        .map((key) => {
+            parseInt(containerStyle.getPropertyValue(key), 10)
+        })
+        .reduce((prev, curr) => {
+            prev + curr
+        });
 
-
-    if (window.location.pathname == '/') {
+    if (window.location.pathname == '/')
         document.querySelector('div.hero').style.height = String(window.innerHeight - navHeight) + 'px';
-    }
-    else {
+    else 
         document.querySelector('div.content').style.height = String(window.innerHeight) + 'px';
-    }
+
 };
 
 function addCurrent() {
