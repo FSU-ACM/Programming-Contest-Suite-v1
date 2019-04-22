@@ -16,7 +16,7 @@
             <header>
                 <nav class="navbar">
                     <div class="logo">
-                        <img src="{% static 'registration/img/logo.png' %}" width="75" height="75">
+                        <img src="{% static 'registration/img/logotest.png' %}" width="75" height="75">
                     </div>
                     <div class="fsu">
                         <img src="{% static 'registration/img/fsu.png' %}" width="340" height="45">
@@ -27,7 +27,8 @@
                     <div class="menu">
                         <ul>
                             <li><a href="{% url 'home' %}">Home</a></li>
-                            <li><a href="{% url 'dispatch' %}">Register</a></li>
+                            <li><a href="{% url 'register' %}">Register</a></li>
+                            <li><a href="{% url 'login' %}">Login</a></li>
                             <li><a href="google.com">About</a></li>
                             <li><a href="google.com">Contact</a></li>
                         </ul>
@@ -36,11 +37,13 @@
             </header>
 
             <div class="hero">
+                    {% block home %}
+                    {% endblock %}
                 <div class="to-content">
                     <i class="arrow down"></i>
                 </div>
             </div>
-
+            
             <div class="content">
                 {% block content %}
                 {% endblock %}
