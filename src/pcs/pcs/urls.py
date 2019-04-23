@@ -27,5 +27,5 @@ urlpatterns = [
     path('register/', regViews.register, name='register'),
     path('login/', regViews.login, name='login'),
     #path('profile/', views.profile, name='profile'),
-    path('checkin/', checkViews.checkin, name='checkin'),
+    path('checkin/', checkViews.swipeCheckin, name='checkin'),
 ]
