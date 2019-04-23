@@ -13,7 +13,6 @@ function logoScrollEvent() {
         else
             fsu.className = 'fsu';
     });
-    
 };
 
 function mobMenuClickEvent() {
@@ -49,7 +48,7 @@ function calcHeight() {
         containerStyle = window.getComputedStyle(container);
     
     let containerHeight = ['height', 'padding-top', 'padding-bottom', 'margin-top', 'margin-bottom']
-        .map((key) => {
+        .map(key => {
             parseInt(containerStyle.getPropertyValue(key), 10)
         })
         .reduce((prev, curr) => {
@@ -57,10 +56,12 @@ function calcHeight() {
         });
 
     if (window.location.pathname == '/')
+    {
         document.querySelector('div.hero').style.height = String(window.innerHeight - navHeight) + 'px';
-    else 
-        document.querySelector('div.content').style.height = String(window.innerHeight) + 'px';
-
+        document.querySelector('div.content').style.height = String(window.innerHeight - navHeight - footerHeight) + 'px';
+    }  
+    else
+        document.querySelector('div.content').style.height = String(containerHeight + Math.floor(window.innerHeight/3)) + 'px';
 };
 
 function addCurrent() {
