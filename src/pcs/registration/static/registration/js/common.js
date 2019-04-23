@@ -13,7 +13,6 @@ function logoScrollEvent() {
         else
             fsu.className = 'fsu';
     });
-    
 };
 
 function mobMenuClickEvent() {
@@ -62,7 +61,7 @@ function calcHeight() {
         document.querySelector('div.content').style.height = String(window.innerHeight - navHeight - footerHeight) + 'px';
     }  
     else
-        document.querySelector('div.content').style.height = String(window.innerHeight) + 'px';
+        document.querySelector('div.content').style.height = String(containerHeight + Math.floor(window.innerHeight/3)) + 'px';
 };
 
 function addCurrent() {
