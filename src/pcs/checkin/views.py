@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from checkin.forms.checkin import CheckinForm
+from checkin.forms.emailCheckin import emailCheckinForm
 from django.core.mail import EmailMessage
 from registration.utility import auth
 
@@ -16,7 +16,7 @@ def emailCheckin(req):
 
     return render(req, 'checkin.html', {'form': form})
 
-def swipeCheckin(req):
+#def swipeCheckin(req):
 
 def sendEmail(user):
     mail_subject = 'Your DOMJudge Credentials'
