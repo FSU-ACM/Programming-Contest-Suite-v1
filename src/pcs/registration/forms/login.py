@@ -1,5 +1,4 @@
 # Login form to validate user input and log them into the system
-
 from django import forms
 from django.core.exceptions import ValidationError
 from bcrypt import hashpw, gensalt
@@ -24,6 +23,5 @@ class LoginForm(forms.Form):
             return True
         else:
             raise ValidationError(('User/Password are not correct'), code='notexits')
-    
-    #def login(self, req):
+        
 
