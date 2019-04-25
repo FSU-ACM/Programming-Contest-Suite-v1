@@ -27,5 +27,7 @@ urlpatterns = [
     path('login/', regViews.login, name='login'),
     path('logout/', regViews.logout, name='logout'),
     path('profile/', regViews.profile, name='profile'),
+    path('profile/manage', regViews.manage, name='manage'),
+    path('profile/courses', regViews.courses, name='courses'),
     path('checkin/', checkViews.emailCheckin, name='checkin'),
 ]

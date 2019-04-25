@@ -73,3 +73,9 @@ def profile(req):
         form = ProfileForm()
     """
     return render(req, 'profile.html')
+
+def manage(req):
+    return render(req, 'manage.html')
+
+def courses(req):
+    return render(req, 'courses.html')
