@@ -1,0 +1,6 @@
+# Package requirements for PCS install #
+
+Django
+MySQL-Server
+Bcrypt
+mysqlclient (version > 1.3.13)
