@@ -72,4 +72,4 @@ def profile(req):
     else:
         form = ProfileForm()
     """
-    return render(req, 'home.html')
+    return render(req, 'profile.html')
