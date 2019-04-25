@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
-#should we import the two views as seperate names to avoid possible conflicts in future?
 from registration import views as regViews
 from checkin import views as checkViews
 
@@ -26,6 +25,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('register/', regViews.register, name='register'),
     path('login/', regViews.login, name='login'),
-    #path('profile/', views.profile, name='profile'),
-    path('checkin/', checkViews.swipeCheckin, name='checkin'),
+    path('logout/', regViews.logout, name='logout'),
+    path('profile/', regViews.profile, name='profile'),
+    path('checkin/', checkViews.emailCheckin, name='checkin'),
 ]

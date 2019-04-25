@@ -1,7 +1,9 @@
 from django import forms
+from django.core import validators
 from django.core.exceptions import ValidationError
 from bcrypt import hashpw, gensalt
-from registration.utility.auth import userExists 
+from registration.utility.auth import userExists
+from registration.utility.validators import *
 from registration.models import Account, Team
 
 class QuickForm(forms.Form):
@@ -38,14 +40,27 @@ class QuickForm(forms.Form):
     Password = forms.CharField(widget=forms.PasswordInput())
         
     def finalize(self, req):
-        if not userExists(req):
+        errors = {}
+        if not validTeamName(req):
+            errors['TeamName'] = 'This name is already taken'
+        
+        if not validFSUID(req):
+            errors['FsuID'] = 'FSU ID already linked to an account'
+
+        if not validFSUNum(req):
+            errors['FsuNum'] = 'Student number already linked to an account'
+
+        if userExists(req):
+            errors['Email'] = 'Email already linked to an account'
+
+        if not errors:
             newUser = Account(
                 FirstName=req['FirstName'],
                 LastName=req['LastName'],
                 FsuID=req['FsuID'],
                 FsuNum=req['FsuNum'],
                 Email=req['Email'],
-                Password=hashpw(str(req['Password']).encode('utf8'), gensalt()),
+                Password=hashpw(str(req['Password']).encode(), gensalt()).decode(),
             )
 
             newUser.save()        
@@ -58,5 +73,9 @@ class QuickForm(forms.Form):
             newTeam.save()
             newUser.Team_id = newTeam.TeamID
             newUser.save()
-    
-    
+
+            return True
+
+        else:
+            self.add_error(None, errors)
+            return False

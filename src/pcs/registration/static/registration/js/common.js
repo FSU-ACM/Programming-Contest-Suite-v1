@@ -49,10 +49,10 @@ function calcHeight() {
     
     let containerHeight = ['height', 'padding-top', 'padding-bottom', 'margin-top', 'margin-bottom']
         .map(key => {
-            parseInt(containerStyle.getPropertyValue(key), 10)
+            return parseInt(containerStyle.getPropertyValue(key), 10)
         })
         .reduce((prev, curr) => {
-            prev + curr
+           return (prev + curr)
         });
 
     if (window.location.pathname == '/')
@@ -61,7 +61,13 @@ function calcHeight() {
         document.querySelector('div.content').style.height = String(window.innerHeight - navHeight - footerHeight) + 'px';
     }  
     else
-        document.querySelector('div.content').style.height = String(containerHeight + Math.floor(window.innerHeight/3)) + 'px';
+    {
+        if ((containerHeight + navHeight + footerHeight) < (window.innerHeight + 50))
+            document.querySelector('div.content').style.height = String(window.innerHeight - navHeight - footerHeight) + 'px';
+        else
+            document.querySelector('div.content').style.height = String(containerHeight + Math.floor(window.innerHeight/4)) + 'px';        
+    }
+    console.log(containerHeight, ' ', window.innerHeight)
 };
 
 function addCurrent() {

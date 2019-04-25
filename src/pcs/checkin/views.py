@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from checkin.forms.checkin import emailCheckinForm
-from checkin.forms.checkin import swipeCheckinForm
+from checkin.forms.emailCheckin import emailCheckinForm
+from checkin.forms.swipeCheckin import swipeCheckinForm
 from django.core.mail import EmailMessage
 from registration.utility import auth
 
