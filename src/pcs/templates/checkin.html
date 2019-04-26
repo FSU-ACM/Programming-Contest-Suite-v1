@@ -7,7 +7,7 @@
     <div class="jumbotron">
         <div class="row">
             <div class="col-md-6 mx-auto">
-                <h1 class="h2 mb-5 font-weight-normal text-center">Check-In</h1>
+                <h1 class="h2 mb-5 font-weight-normal text-center">Check-in</h1>
                 <form noValidate method="post">
                     {% csrf_token %}
                     <div class="form-row">
@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-lg btn-outline-danger btn-block">Submit</button>
-                    <a href="{% url 'emailcheckin' %}">Check-In with Email Address</a>
+                    <a href="{% url 'emailcheckin' %}">Check-in with Email Address</a>
                 </form>
             </div>
         </div>
