@@ -79,3 +79,6 @@ def manage(req):
 
 def courses(req):
     return render(req, 'courses.html')
+
+def options(req):
+    return render(req, 'options.html')

@@ -29,5 +29,6 @@ urlpatterns = [
     path('profile/', regViews.profile, name='profile'),
     path('profile/manage', regViews.manage, name='manage'),
     path('profile/courses', regViews.courses, name='courses'),
+    path('profile/options', regViews.options, name='options'),
     path('checkin/', checkViews.emailCheckin, name='checkin'),
 ]

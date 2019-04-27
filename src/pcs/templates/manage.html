@@ -2,8 +2,8 @@
 {% extends 'profile.html' %}
 {% block manage %}
 
-        <div class="jumbotron">
-
+<br/>
+<br/>
                 <div class="row mx-5">
                         <h3>Manage Team</h3>
                         
@@ -15,11 +15,11 @@
                         </p>
                 </div>
                 <div class="col-md-4 m-auto p-2">
-                                <form action="{% url 'profile' %}">
+                                <form action="{% url 'options' %}">
                                         <input type="submit" class="btn btn-lg btn-outline-danger btn-block btn-alt" value="Save & Return" />
                                 </form>
                 </div>
 
-        </div>
+
 
 {% endblock %}
