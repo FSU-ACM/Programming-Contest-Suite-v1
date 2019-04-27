@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from registration.forms.quick import QuickForm
 from registration.forms.login import LoginForm
 from registration.utility.auth import getUser
+from registration.models import Account, Team
 
 
 def register(req):
@@ -72,13 +73,45 @@ def profile(req):
     else:
         form = ProfileForm()
     """
-    return render(req, 'profile.html')
+    user = Account.objects.get(AccountID=req.session['a_id'])
+    team = Team.objects.get(TeamID=user.Team_id)
+    userInfo = {
+        'FirstName': user.FirstName, 
+        'LastName': user.LastName, 
+        'Email': user.Email,
+        'TeamName': team.TeamName
+    }
+    return render (req, 'profile.html', {'userInfo': userInfo})
 
 def manage(req):
-    return render(req, 'manage.html')
+    user = Account.objects.get(AccountID=req.session['a_id'])
+    team = Team.objects.get(TeamID=user.Team_id)
+    userInfo = {
+        'FirstName': user.FirstName, 
+        'LastName': user.LastName, 
+        'Email': user.Email,
+        'TeamName': team.TeamName
+    }
+    return render(req, 'manage.html', {'userInfo': userInfo})
 
 def courses(req):
-    return render(req, 'courses.html')
+    user = Account.objects.get(AccountID=req.session['a_id'])
+    team = Team.objects.get(TeamID=user.Team_id)
+    userInfo = {
+        'FirstName': user.FirstName, 
+        'LastName': user.LastName, 
+        'Email': user.Email,
+        'TeamName': team.TeamName
+    }
+    return render(req, 'courses.html', {'userInfo': userInfo})
 
 def options(req):
-    return render(req, 'options.html')
+    user = Account.objects.get(AccountID=req.session['a_id'])
+    team = Team.objects.get(TeamID=user.Team_id)
+    userInfo = {
+        'FirstName': user.FirstName, 
+        'LastName': user.LastName, 
+        'Email': user.Email,
+        'TeamName': team.TeamName
+    }
+    return render(req, 'options.html', {'userInfo': userInfo})
