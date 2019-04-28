@@ -76,8 +76,7 @@ def register(req):
         soloForms = SoloFormSet()
         teamForm = TeamForm()
 
-    return render(req, 'forms/quick.html', {
-        'teamForm': teamForm, 'soloForms': soloForms})
+    return render(req, 'forms/quick.html', {'teamForm': teamForm, 'soloForms': soloForms})
 
 
 def login(req):

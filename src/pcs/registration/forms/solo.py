@@ -5,6 +5,8 @@ from registration.utility.auth import userExists
 from registration.utility.validators import *
 from registration.models import Account
 
+#class CourseField(forms):
+
 class SoloForm(forms.Form):
     FirstName = forms.CharField(
         label='First Name',

@@ -17,11 +17,19 @@ class LoginForm(forms.Form):
         # password matches that user.
         # if they don't match or are not in the db an error will
         # display and the user will have to try again.
-        if userExists(req) and checkPass(req):
+        loginErrors = {}
+        if not userExists(req):
+            loginErrors['Email'] = 'No user exists with this email'
+        elif not checkPass(req):
             # log user in to system
             # dummy statement
+            loginErrors['Password'] = 'Incorrect password'
+
+
+        if not loginErrors:
             return True
         else:
-            raise ValidationError(('User/Password are not correct'), code='notexits')
+            self.add_errors(None, loginErrors)
+            return False
         
 
