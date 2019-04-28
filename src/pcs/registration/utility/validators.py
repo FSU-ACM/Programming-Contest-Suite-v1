@@ -13,13 +13,19 @@ def validTeamName(req):
     return collision(req, model='team', identifier='name')
 
 
-def validFSUNum(req):
+def availableFSUNum(req):
     """
-   Valid FSU Num
+    Available FSU Num
     - returns False if FSU Num is already linked to an account, True otherwise
     """
     return collision(req, model='account', identifier='num')
 
+def validFSUNum(req):
+    """
+    Valid FSU Num
+    - returns False if FSU Num contains characters, True otherwise
+    """
+    return str(req['FsuNum']).isdigit()
 
 def validFSUID(req):
     """
