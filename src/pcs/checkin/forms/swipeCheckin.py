@@ -9,9 +9,9 @@ class swipeCheckinForm(forms.Form):
     fsuNum = forms.CharField(widget=forms.TextInput(
         attrs={'placeholder': 'FSU Number'}))
 
-    # determines if the swipe is valid 
+    # determines if the swipe is valid
     def validRead(self):
-        if self.fsuNum[1] == 'B'
+        if self.fsuNum[1] == 'B':
             return True
         return False
 
