@@ -9,6 +9,7 @@ from registration.forms.quick import QuickForm
 from registration.forms.login import LoginForm
 from registration.utility.auth import getUser
 from registration.models import Account, Team, Course
+from registration.utility.resources import ExportCSV
 
 
 def register(req):
@@ -27,7 +28,7 @@ def register(req):
             return HttpResponseRedirect('/login')
     else:
         form = QuickForm()
-    
+
     return render(req, 'forms/quick.html', {'form': form})
 
 
@@ -55,6 +56,7 @@ def login(req):
 
     return render(req, 'login.html', {'form': form})
 
+
 def logout(req):
     """
     - delete session for user
@@ -65,6 +67,7 @@ def logout(req):
     except KeyError:
         pass
     return HttpResponseRedirect('/')
+
 
 def profile(req):
     """
@@ -83,14 +86,15 @@ def profile(req):
         courseList.append(i.CourseName)
 
     userInfo = {
-        'FirstName': user.FirstName, 
-        'LastName': user.LastName, 
+        'FirstName': user.FirstName,
+        'LastName': user.LastName,
         'Email': user.Email,
         'TeamName': team.TeamName,
         'Courses': courses,
         'CourseList': courseList
     }
-    return render (req, 'profile.html', {'userInfo': userInfo})
+    return render(req, 'profile.html', {'userInfo': userInfo})
+
 
 def manage(req):
     user = Account.objects.get(AccountID=req.session['a_id'])
@@ -103,14 +107,15 @@ def manage(req):
         courseList.append(i.CourseName)
 
     userInfo = {
-        'FirstName': user.FirstName, 
-        'LastName': user.LastName, 
+        'FirstName': user.FirstName,
+        'LastName': user.LastName,
         'Email': user.Email,
         'TeamName': team.TeamName,
         'Courses': courses,
         'CourseList': courseList
     }
     return render(req, 'manage.html', {'userInfo': userInfo})
+
 
 def courses(req):
     user = Account.objects.get(AccountID=req.session['a_id'])
@@ -123,8 +128,8 @@ def courses(req):
         courseList.append(i.CourseName)
 
     userInfo = {
-        'FirstName': user.FirstName, 
-        'LastName': user.LastName, 
+        'FirstName': user.FirstName,
+        'LastName': user.LastName,
         'Email': user.Email,
         'TeamName': team.TeamName,
         'Courses': courses,
@@ -132,6 +137,7 @@ def courses(req):
     }
     return render(req, 'courses.html', {'userInfo': userInfo})
     
+
 
 def options(req):
     user = Account.objects.get(AccountID=req.session['a_id'])
@@ -144,11 +150,23 @@ def options(req):
         courseList.append(i.CourseName)
 
     userInfo = {
-        'FirstName': user.FirstName, 
-        'LastName': user.LastName, 
+        'FirstName': user.FirstName,
+        'LastName': user.LastName,
         'Email': user.Email,
         'TeamName': team.TeamName,
         'Courses': courses,
         'CourseList': courseList
     }
     return render(req, 'options.html', {'userInfo': userInfo})
+
+
+def teamcsv(req):
+    if req.method == 'GET':
+        ExportCSV("Team")
+        return HttpResponseRedirect('/createcsv')
+
+
+def accountscsv(req):
+    if req.method == 'GET':
+        ExportCSV("Accounts")
+    return HttpResponseRedirect('/createcsv')
