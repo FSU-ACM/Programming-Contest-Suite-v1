@@ -9,6 +9,7 @@ from registration.forms.quick import QuickForm
 from registration.forms.login import LoginForm
 from registration.utility.auth import getUser
 from registration.models import Account, Team
+from registration.utility.resources import ExportCSV
 
 
 def register(req):
@@ -27,7 +28,7 @@ def register(req):
             return HttpResponseRedirect('/login')
     else:
         form = QuickForm()
-    
+
     return render(req, 'forms/quick.html', {'form': form})
 
 
@@ -55,6 +56,7 @@ def login(req):
 
     return render(req, 'login.html', {'form': form})
 
+
 def logout(req):
     """
     - delete session for user
@@ -66,6 +68,7 @@ def logout(req):
         pass
     return HttpResponseRedirect('/')
 
+
 def profile(req):
     """
     if req.method == 'POST':
@@ -76,42 +79,57 @@ def profile(req):
     user = Account.objects.get(AccountID=req.session['a_id'])
     team = Team.objects.get(TeamID=user.Team_id)
     userInfo = {
-        'FirstName': user.FirstName, 
-        'LastName': user.LastName, 
+        'FirstName': user.FirstName,
+        'LastName': user.LastName,
         'Email': user.Email,
         'TeamName': team.TeamName
     }
-    return render (req, 'profile.html', {'userInfo': userInfo})
+    return render(req, 'profile.html', {'userInfo': userInfo})
+
 
 def manage(req):
     user = Account.objects.get(AccountID=req.session['a_id'])
     team = Team.objects.get(TeamID=user.Team_id)
     userInfo = {
-        'FirstName': user.FirstName, 
-        'LastName': user.LastName, 
+        'FirstName': user.FirstName,
+        'LastName': user.LastName,
         'Email': user.Email,
         'TeamName': team.TeamName
     }
     return render(req, 'manage.html', {'userInfo': userInfo})
 
+
 def courses(req):
     user = Account.objects.get(AccountID=req.session['a_id'])
     team = Team.objects.get(TeamID=user.Team_id)
     userInfo = {
-        'FirstName': user.FirstName, 
-        'LastName': user.LastName, 
+        'FirstName': user.FirstName,
+        'LastName': user.LastName,
         'Email': user.Email,
         'TeamName': team.TeamName
     }
     return render(req, 'courses.html', {'userInfo': userInfo})
 
+
 def options(req):
     user = Account.objects.get(AccountID=req.session['a_id'])
     team = Team.objects.get(TeamID=user.Team_id)
     userInfo = {
-        'FirstName': user.FirstName, 
-        'LastName': user.LastName, 
+        'FirstName': user.FirstName,
+        'LastName': user.LastName,
         'Email': user.Email,
         'TeamName': team.TeamName
     }
     return render(req, 'options.html', {'userInfo': userInfo})
+
+
+def teamcsv(req):
+    if req.method == 'GET':
+        ExportCSV("Team")
+        return HttpResponseRedirect('/createcsv')
+
+
+def accountscsv(req):
+    if req.method == 'GET':
+        ExportCSV("Accounts")
+    return HttpResponseRedirect('/createcsv')

@@ -33,5 +33,7 @@ urlpatterns = [
     path('checkin/', checkViews.swipeCheckin, name='checkin'),
     path('emailcheckin/', checkViews.emailCheckin, name='emailcheckin'),
     path('createcsv/', TemplateView.as_view(
-        template_name='createCSV.html'), name='createcsv')
+        template_name='createCSV.html'), name='createcsv'),
+    path('teamcsv/', regViews.teamcsv, name='teamcsv'),
+    path('accountscsv/', regViews.accountscsv, name='accountscsv'),
 ]

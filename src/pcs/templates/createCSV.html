@@ -1,7 +1,25 @@
 {% extends 'base.html'%}
 {% block content %}
 
-<button onclick="ExportCSV("Team")">Team CSV</button>
-<button onclick="ExportCSV("Accounts")">Accounts CSV</button>
+<div class="container col-md-8 rounded-lg py-5">
+  <div class="jumbotron">
 
+    <div class="row mt-5">
+      <div class="col-md-4 m-auto p-2">
+
+        <form action="{% url 'teamcsv' %}">
+          <input type="submit" class="btn btn-lg btn-outline-danger btn-block btn-alt" value="Team CSV" />
+        </form>
+
+      </div>
+
+      <div class="col-md-4 m-auto p-2">
+        <form action="{% url 'accountscsv' %}">
+          <input type="submit" class="btn btn-lg btn-outline-danger btn-block btn-alt" value="Accounts CSV" />
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
 {% endblock%}
