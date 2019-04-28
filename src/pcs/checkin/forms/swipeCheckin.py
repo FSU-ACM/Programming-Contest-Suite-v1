@@ -1,4 +1,4 @@
-# Checkin form to register their attendance at a contest
+# Swipe check-in form to register their attendance at a contest
 
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
@@ -8,7 +8,7 @@ from registration.utility import auth
 class swipeCheckinForm(forms.Form):
     FsuNum = forms.CharField(widget=forms.TextInput(
         attrs={'placeholder': 'FSU Number'}),
-        label='Please swipe your FSUCard and click submit'
+        label='Please swipe your FSUCard'
     )
 
     # determines if the swipe is valid
@@ -26,6 +26,7 @@ class swipeCheckinForm(forms.Form):
         if self.validRead(req):
             req['FsuNum'] = self.parse(req)
         # userExists will check that user is in db
+        # if user is in DB they will be marked as checked-in
         # if they don't match or are not in the db an error will
         # display and the user will have to try again.
         try:
