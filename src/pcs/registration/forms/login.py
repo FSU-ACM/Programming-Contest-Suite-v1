@@ -25,11 +25,8 @@ class LoginForm(forms.Form):
             # dummy statement
             loginErrors['Password'] = 'Incorrect password'
 
-
         if not loginErrors:
             return True
         else:
-            self.add_errors(None, loginErrors)
+            self.add_error(None, loginErrors)
             return False
-        
-
