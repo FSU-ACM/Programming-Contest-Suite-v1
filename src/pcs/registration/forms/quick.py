@@ -3,9 +3,10 @@ from django.core import validators
 from django.core.exceptions import ValidationError
 from bcrypt import hashpw, gensalt
 from registration.utility.auth import userExists
-from registration.utility.passgen import *
+from registration.utility.passgen import makePassword
 from registration.utility.validators import *
 from registration.models import Account, Team
+
 
 class QuickForm(forms.Form):
     TeamName = forms.CharField(
@@ -32,12 +33,16 @@ class QuickForm(forms.Form):
         max_length=8,
         min_length=8,
         label='FSU Number',
-        widget=forms.TextInput(attrs={'placeholder': 'Last 8 Digits of myFSU Card'})
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Last 8 Digits of myFSU Card'})
     )
 
-    Division = forms.ChoiceField(widget=forms.RadioSelect(), choices=Team.DIVISION, required=True)
-    Role = forms.ChoiceField(widget=forms.RadioSelect(), choices=Account.ROLE, required=False)
-    Email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
+    Division = forms.ChoiceField(
+        widget=forms.RadioSelect(), choices=Team.DIVISION, required=True)
+    Role = forms.ChoiceField(
+        widget=forms.RadioSelect(), choices=Account.ROLE, required=False)
+    Email = forms.EmailField(
+        widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
     Password = forms.CharField(widget=forms.PasswordInput())
 
     def finalize(self, req):
@@ -61,14 +66,15 @@ class QuickForm(forms.Form):
                 FsuID=req['FsuID'],
                 FsuNum=req['FsuNum'],
                 Email=req['Email'],
-                Password=hashpw(str(req['Password']).encode(), gensalt()).decode(),
+                Password=hashpw(str(
+                    req['Password']).encode(), gensalt()).decode(),
             )
 
             newUser.save()
             newTeam = Team(
                 TeamName=req['TeamName'],
                 Division=req['Division'],
-                Password=passgen.makePassword(),
+                Password=makePassword(),
                 Leader_id=newUser.AccountID
             )
 
