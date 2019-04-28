@@ -49,7 +49,7 @@ def login(req):
             user = getUser(req.POST)
             req.session.set_expiry(0)
             req.session['a_id'] = user.AccountID
-            return HttpResponseRedirect('/profile')
+            return HttpResponseRedirect('/profile/options')
     else:
         form = LoginForm()
 
