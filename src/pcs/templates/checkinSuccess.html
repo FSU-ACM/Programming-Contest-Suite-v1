@@ -2,7 +2,11 @@
 
 {% block content %}
 
-
+<script>
+setTimeout(function(){
+  window.location.href = "{% url 'checkin' %}";
+}, 5000);
+</script>
 <div class="container col-md-8 rounded-lg py-5">
   <div class="jumbotron">
     <div class="row mx-5">
