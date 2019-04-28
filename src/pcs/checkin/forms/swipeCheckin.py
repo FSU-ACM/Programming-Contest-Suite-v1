@@ -8,7 +8,7 @@ from registration.utility import auth
 class swipeCheckinForm(forms.Form):
     FsuNum = forms.CharField(widget=forms.TextInput(
         attrs={'placeholder': 'FSU Number'}),
-        label='FSU Number'
+        label='Please swipe your FSUCard and click submit'
     )
 
     # determines if the swipe is valid

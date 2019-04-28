@@ -7,7 +7,9 @@ from registration.utility import auth
 
 class emailCheckinForm(forms.Form):
     Email = forms.EmailField(widget=forms.EmailInput(
-        attrs={'placeholder': 'Email'}))
+        attrs={'placeholder': 'Email'}),
+        label='Please enter your email address and click submit'
+    )
 
     def validUser(self, req):
         errors = {}
