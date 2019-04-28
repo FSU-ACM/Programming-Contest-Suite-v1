@@ -11,6 +11,7 @@ class AccountResource(resources.ModelResource):
 class TeamResource(resources.ModelResource):
     class Meta:
         model = Team
+        fields = ('TeamName', 'Password')
 
 
 def ExportCSV(choice):
