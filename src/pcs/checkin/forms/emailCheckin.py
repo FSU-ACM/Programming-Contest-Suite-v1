@@ -1,7 +1,7 @@
 # Checkin form to register their attendance at a contest
 
 from django import forms
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ObjectDoesNotExist
 from registration.models import Account
 from registration.utility import auth
 
@@ -15,12 +15,12 @@ class emailCheckinForm(forms.Form):
         # if they don't match or are not in the db an error will
         # display and the user will have to try again.
         try:
-            user = Account.objects.get(FsuNum=req['fsuNum'])
+            user = Account.objects.get(Email=req['Email'])
             user.isCheckedIn = True
             user.save()
             return True
         except ObjectDoesNotExist:
-            errors['fsuNum'] = 'Check-in failed'
+            errors['Email'] = 'Check-in failed'
             self.add_error(None, errors)
             return False
 
