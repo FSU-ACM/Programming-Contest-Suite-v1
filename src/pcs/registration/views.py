@@ -6,12 +6,11 @@ Registration App Views
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.forms import formset_factory
-from registration.forms.quick import QuickForm
-from registration.forms.login import LoginForm
 from registration.utility.auth import getUser
 from registration.utility.register import addAccount, addTeam
 from registration.forms.solo import SoloForm
 from registration.forms.team import TeamForm
+from registration.forms.login import LoginForm
 from registration.models import Account, Team, Course
 from registration.utility.resources import ExportCSV
 

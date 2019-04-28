@@ -71,7 +71,6 @@ class Account(models.Model):
     Password = models.CharField(max_length=250)
     isCheckedIn = models.BooleanField(default=False)
     Team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True)
-    #Course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
     course_id = models.ManyToManyField(Course)
     def __str__(self):
         return str(self.FirstName, ' ', self.LastName)
