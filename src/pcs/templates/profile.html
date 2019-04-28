@@ -22,6 +22,9 @@
                 <div class="row mx-5"
                         <p>
                                 <strong style="padding-right: 1em;">Extra Credit Courses: </strong>
+                                {% for x in userInfo.CourseList %} 
+                                        {{x}} <br> 
+                                {% endfor %}
                         </p>
                 </div>
 

@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from registration.forms.quick import QuickForm
 from registration.forms.login import LoginForm
 from registration.utility.auth import getUser
-from registration.models import Account, Team
+from registration.models import Account, Team, Course
 
 
 def register(req):
@@ -75,43 +75,80 @@ def profile(req):
     """
     user = Account.objects.get(AccountID=req.session['a_id'])
     team = Team.objects.get(TeamID=user.Team_id)
+    course = Course.objects.filter(account=user.AccountID)
+    courses = {}
+    courseList = list()
+    for i in course:
+        courses[i.CourseID] = i.CourseName
+        courseList.append(i.CourseName)
+
     userInfo = {
         'FirstName': user.FirstName, 
         'LastName': user.LastName, 
         'Email': user.Email,
-        'TeamName': team.TeamName
+        'TeamName': team.TeamName,
+        'Courses': courses,
+        'CourseList': courseList
     }
     return render (req, 'profile.html', {'userInfo': userInfo})
 
 def manage(req):
     user = Account.objects.get(AccountID=req.session['a_id'])
     team = Team.objects.get(TeamID=user.Team_id)
+    course = Course.objects.filter(account=user.AccountID)
+    courses = {}
+    courseList = list()
+    for i in course:
+        courses[i.CourseID] = i.CourseName
+        courseList.append(i.CourseName)
+
     userInfo = {
         'FirstName': user.FirstName, 
         'LastName': user.LastName, 
         'Email': user.Email,
-        'TeamName': team.TeamName
+        'TeamName': team.TeamName,
+        'Courses': courses,
+        'CourseList': courseList
     }
     return render(req, 'manage.html', {'userInfo': userInfo})
 
 def courses(req):
     user = Account.objects.get(AccountID=req.session['a_id'])
     team = Team.objects.get(TeamID=user.Team_id)
+    course = Course.objects.filter(account=user.AccountID)
+    courses = {}
+    courseList = list()
+    for i in course:
+        courses[i.CourseID] = i.CourseName
+        courseList.append(i.CourseName)
+
     userInfo = {
         'FirstName': user.FirstName, 
         'LastName': user.LastName, 
         'Email': user.Email,
-        'TeamName': team.TeamName
+        'TeamName': team.TeamName,
+        'Courses': courses,
+        'CourseList': courseList
     }
     return render(req, 'courses.html', {'userInfo': userInfo})
+    
 
 def options(req):
     user = Account.objects.get(AccountID=req.session['a_id'])
     team = Team.objects.get(TeamID=user.Team_id)
+    course = Course.objects.filter(account=user.AccountID)
+    courses = {}
+    courseList = list()
+    for i in course:
+        courses[i.CourseID] = i.CourseName
+        courseList.append(i.CourseName)
+
     userInfo = {
         'FirstName': user.FirstName, 
         'LastName': user.LastName, 
         'Email': user.Email,
-        'TeamName': team.TeamName
+        'TeamName': team.TeamName,
+        'Courses': courses,
+        'CourseList': courseList
     }
     return render(req, 'options.html', {'userInfo': userInfo})
