@@ -3,26 +3,30 @@
 
 <br/>
 <br/>
-                <div class="row mx-5">
-                        <h3>Delete Account?</h3>
-                </div>
-                <div class="row mx-5">
-                        <p style="color:red;">
-                        Are you sure you want to delete you account?
-                        </p>
-                </div>
+<div class="row mx-5">
+  <h3>Delete Account?</h3>
+</div>
+<div class="row mx-5">
+  <p style="color:red;">
+    Are you sure you want to delete you account?
+  </p>
+</div>
 
-                <div class="row mx-5">
-                        <div class="col-md-4 m-auto p-2">
-                                <form action="{% url 'options' %}">
-                                        <input type="submit" class="btn btn-lg btn-outline-danger btn-block btn-alt" value="Delete Account" />
-                                </form>
-                        </div>
-                        <div class="col-md-4 m-auto p-2">
-                                <form action="{% url 'options' %}">
-                                        <input type="submit" class="btn btn-lg btn-outline-danger btn-block btn-alt" value="Back to Profile" />
-                                </form>
-                        </div>
-                </div>
+<div class="row mx-5">
+  <div class="col-md-4 m-auto p-2">
+    <form action="{% url 'options' %}">
+      <input type="submit"
+             class="btn btn-lg btn-outline-danger btn-block btn-alt"
+             value="Delete Account" />
+    </form>
+  </div>
+  <div class="col-md-4 m-auto p-2">
+    <form action="{% url 'options' %}">
+      <input type="submit"
+             class="btn btn-lg btn-outline-danger btn-block btn-alt"
+             value="Back to Profile" />
+    </form>
+  </div>
+</div>
 
 {% endblock %}
