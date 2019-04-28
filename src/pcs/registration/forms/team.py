@@ -1,5 +1,5 @@
 from django import forms
-from django.core import validators
+from registration.utility.validators import *
 from registration.models import Team
 
 class TeamForm(forms.Form):

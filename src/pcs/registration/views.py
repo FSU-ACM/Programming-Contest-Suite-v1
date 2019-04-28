@@ -175,7 +175,6 @@ def courses(req):
         'CourseList': courseList
     }
     return render(req, 'courses.html', {'userInfo': userInfo})
-    
 
 
 def options(req):
@@ -200,12 +199,18 @@ def options(req):
 
 
 def teamcsv(req):
+    """
+    Creates teams.csv on server drive for use with DomJudge.
+    """
     if req.method == 'GET':
         ExportCSV("Team")
         return HttpResponseRedirect('/createcsv')
 
 
 def accountscsv(req):
+    """
+    Creates accounts.csv on server drive.
+    """
     if req.method == 'GET':
         ExportCSV("Accounts")
     return HttpResponseRedirect('/createcsv')
