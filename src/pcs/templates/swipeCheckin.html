@@ -12,10 +12,11 @@
                     {% csrf_token %}
                     <div class="form-row">
                         <div class="form-group col-md-8 mb-0">
-                            {{ form.Email | as_crispy_field }}
+                            {{ form.fsuNum | as_crispy_field }}
                         </div>
                     </div>
                     <button type="submit" class="btn btn-lg btn-outline-danger btn-block">Submit</button>
+                    <br />
                     <a href="{% url 'emailcheckin' %}">Check-in with Email Address</a>
                 </form>
             </div>

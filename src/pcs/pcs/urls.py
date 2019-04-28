@@ -30,5 +30,6 @@ urlpatterns = [
     path('profile/manage', regViews.manage, name='manage'),
     path('profile/courses', regViews.courses, name='courses'),
     path('profile/options', regViews.options, name='options'),
-    path('checkin/', checkViews.emailCheckin, name='checkin'),
+    path('checkin/', checkViews.swipeCheckin, name='checkin'),
+    path('emailcheckin/', checkViews.emailCheckin, name='emailcheckin'),
 ]
