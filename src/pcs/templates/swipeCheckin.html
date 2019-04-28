@@ -4,23 +4,25 @@
 {% block content %}
 
 <div class="container rounded-lg py-auto">
-    <div class="jumbotron">
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                <h1 class="h2 mb-5 font-weight-normal text-center">Check-in</h1>
-                <form noValidate method="post">
-                    {% csrf_token %}
-                    <div class="form-row">
-                        <div class="form-group col-md-8 mb-0">
-                            {{ form.FsuNum | as_crispy_field }}
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-lg btn-outline-danger btn-block">Submit</button>
-                    <br />
-                    <a href="{% url 'emailcheckin' %}">Check-in with Email Address</a>
-                </form>
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <h1 class="h2 mb-5 font-weight-normal text-center">Check-in</h1>
+        <form noValidate method="post">
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group col-md-8 mb-0">
+              {{ form.FsuNum | as_crispy_field }}
             </div>
-        </div>
+          </div>
+          <button type="submit"
+                  class="btn btn-lg btn-outline-danger btn-block"
+                  >Submit</button>
+          <br />
+          <a href="{% url 'emailcheckin' %}">Check-in with Email Address</a>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
 {% endblock %}
