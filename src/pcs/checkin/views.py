@@ -6,15 +6,26 @@ from registration.models import Account
 from registration.models import Team
 
 # method to send DOMJudge login credentials
-def sendEmail(user):
+def sendEmail(User):
+    contestAddress = 'domjudge.cs.fsu.edu'
+    team = Team.objects.get(TeamID=User.Team)
     mail_subject = 'Your DOMJudge Credentials'
-    message = 'This is a test message.'
+    message = User.FirstName + ', \n'+
+              '\tYou are checked-in to the contest!'+
+              ' To log into DOMJudge, go to ' + contestAddress +
+              ' and enter the credentials below. Thanks for participating!\n'+
+              'Username: ' + Team.TeamName = '\n' +
+              'Password: ' + Team.Password
     to_email = user.Email
     email = EmailMessage(
                 mail_subject, message, to=[to_email]
     )
     email.send()
 
+# view to handle email check-in
+# if the user entry is valid and the user exists in the DB
+# then user will receive a confirmation email and success page displays
+# if not in DB user is presented with the same form for reentry
 def emailCheckin(req):
     if req.method == 'POST':
         form = emailCheckinForm(req.POST)
@@ -27,10 +38,13 @@ def emailCheckin(req):
 
     return render(req, 'emailCheckin.html', {'form': form})
 
+# view to handle swipe check-in
+# if the user entry is valid and the user exists in the DB
+# then user will receive a confirmation email and success page displays
 def swipeCheckin(req):
     if req.method == 'POST':
         form = swipeCheckinForm(req.POST)
-        if form.is_valid() and form.validUser(req.POST):
+        if form.is_valid() and form.validUser(req.POST.copy()):
             User = Account.objects.get(FsuNum=form.parse(req.POST))
             #sendEmail(User)
             return render(req, 'checkinSuccess.html')
