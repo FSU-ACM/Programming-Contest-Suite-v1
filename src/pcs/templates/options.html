@@ -2,7 +2,6 @@
 {% extends 'profile.html' %}
 {% block options %}
 
-
         <div class="row mt-5">
                 <div class="col-md-4 m-auto p-2">
                 
@@ -16,16 +15,14 @@
                                 <input type="submit" class="btn btn-lg btn-outline-danger btn-block btn-alt" value="Manage Courses" />
                         </form>
                 </div>
+        </div>
 
+        <div class="row mt-5">
+                <div class="col-md-4 m-auto p-2">
+                        <form action="{% url 'delete' %}">
+                                <input type="submit" class="btn btn-lg btn-outline-danger btn-block" value="Delete Account" />
+                        </form>
                 </div>
-
-                <div class="row mt-5">
-                        <div class="col-md-4 m-auto p-2">
-                                <form action="{% url 'delete' %}">
-                                        <input type="submit" class="btn btn-lg btn-outline-danger btn-block" value="Delete Account" />
-                                </form>
-                        </div>
-                </div>
-
+        </div>
 
 {% endblock %}
