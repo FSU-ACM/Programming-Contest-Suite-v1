@@ -33,8 +33,8 @@ urlpatterns = [
     path('profile/delete', regViews.delete, name='delete'),
     path('checkin/', checkViews.swipeCheckin, name='checkin'),
     path('emailcheckin/', checkViews.emailCheckin, name='emailcheckin'),
-    path('createcsv/', TemplateView.as_view(
-        template_name='createCSV.html'), name='createcsv'),
-    path('teamcsv/', regViews.teamcsv, name='teamcsv'),
-    path('accountscsv/', regViews.accountscsv, name='accountscsv'),
+    path('createtsv/', TemplateView.as_view(
+        template_name='createTSV.html'), name='createTsv'),
+    path('teamcsv/', regViews.teamtsv, name='teamtsv'),
+    path('accountscsv/', regViews.accountstsv, name='accountstsv'),
 ]

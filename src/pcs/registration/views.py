@@ -205,6 +205,7 @@ def options(req):
     }
     return render(req, 'options.html', {'userInfo': userInfo})
 
+
 def delete(req):
     user = Account.objects.get(AccountID=req.session['a_id'])
     team = Team.objects.get(TeamID=user.Team_id)
@@ -226,19 +227,19 @@ def delete(req):
     return render(req, 'delete.html', {'userInfo': userInfo})
 
 
-def teamcsv(req):
+def teamtsv(req):
     """
-    Creates teams.csv on server drive for use with DomJudge.
+    Creates teams.tsv on server drive for use with DomJudge.
     """
     if req.method == 'GET':
         ExportCSV("Team")
-        return HttpResponseRedirect('/createcsv')
+        return HttpResponseRedirect('/createtsv')
 
 
-def accountscsv(req):
+def accountstsv(req):
     """
-    Creates accounts.csv on server drive.
+    Creates accounts.tsv on server drive.
     """
     if req.method == 'GET':
         ExportCSV("Accounts")
-    return HttpResponseRedirect('/createcsv')
+    return HttpResponseRedirect('/createtsv')
