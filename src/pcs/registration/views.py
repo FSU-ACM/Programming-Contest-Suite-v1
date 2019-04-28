@@ -205,6 +205,26 @@ def options(req):
     }
     return render(req, 'options.html', {'userInfo': userInfo})
 
+def delete(req):
+    user = Account.objects.get(AccountID=req.session['a_id'])
+    team = Team.objects.get(TeamID=user.Team_id)
+    course = Course.objects.filter(account=user.AccountID)
+    courses = {}
+    courseList = list()
+    for i in course:
+        courses[i.CourseID] = i.CourseName
+        courseList.append(i.CourseName)
+
+    userInfo = {
+        'FirstName': user.FirstName,
+        'LastName': user.LastName,
+        'Email': user.Email,
+        'TeamName': team.TeamName,
+        'Courses': courses,
+        'CourseList': courseList
+    }
+    return render(req, 'delete.html', {'userInfo': userInfo})
+
 
 def teamcsv(req):
     """

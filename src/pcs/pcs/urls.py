@@ -30,6 +30,7 @@ urlpatterns = [
     path('profile/manage', regViews.manage, name='manage'),
     path('profile/courses', regViews.courses, name='courses'),
     path('profile/options', regViews.options, name='options'),
+    path('profile/delete', regViews.delete, name='delete'),
     path('checkin/', checkViews.swipeCheckin, name='checkin'),
     path('emailcheckin/', checkViews.emailCheckin, name='emailcheckin'),
     path('createcsv/', TemplateView.as_view(
