@@ -63,10 +63,10 @@ def register(req):
             user1.Team_id = team.TeamID
             user1.save()
 
-            if user2 is not None:
+            if userInfo2:
                 user2.Team_id = team.TeamID
                 user2.save()
-            if user3 is not None:
+            if userInfo3:
                 user3.Team_id = team.TeamID
                 user3.save()
 
