@@ -8,12 +8,13 @@ from registration.utility import auth
 class emailCheckinForm(forms.Form):
     Email = forms.EmailField(widget=forms.EmailInput(
         attrs={'placeholder': 'Email'}),
-        label='Please enter your email address and click submit'
+        label='Please enter your email address'
     )
 
     def validUser(self, req):
         errors = {}
         # userExists will check that user is in db
+        # if user is in DB they will be marked as checked-in
         # if they don't match or are not in the db an error will
         # display and the user will have to try again.
         try:
@@ -25,7 +26,6 @@ class emailCheckinForm(forms.Form):
             errors['Email'] = 'Check-in failed'
             self.add_error(None, errors)
             return False
-
 
         if auth.userExists(req):
             # mark user at checked in
