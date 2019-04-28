@@ -32,44 +32,45 @@ def register(req):
         if soloForms.is_valid() and teamForm.is_valid() and teamForm.reclean(teamForm.cleaned_data):
             info = soloForms.cleaned_data
             valid = True
-            for i,form in enumerate(soloForms):
+            for i, form in enumerate(soloForms):
                 if form.is_valid() and info[i]:
                     if not form.reclean(info[i]):
                         valid = False
 
         if valid:
             teamInfo = teamForm.cleaned_data
-            userInfo1 = info[0]            
+            userInfo1 = info[0]
             userInfo2 = info[1]
             userInfo3 = info[2]
             members = {'1': userInfo1.__str__()}
             user1 = addAccount(userInfo1)
-            
+
             if userInfo2:
                 members['2'] = userInfo2.__str__()
                 user2 = addAccount(userInfo2)
             if userInfo3:
                 members['3'] = userInfo3.__str__()
                 user3 = addAccount(userInfo3)
-            
+
             team = addTeam(teamInfo, user1.AccountID, members)
             user1.Team_id = team.TeamID
             user1.save()
-            
+
             if user2 is not None:
                 user2.Team_id = team.TeamID
                 user2.save()
             if user3 is not None:
                 user3.Team_id = team.TeamID
                 user3.save()
-                
+
             return HttpResponseRedirect('/login')
-                    
+
     else:
         soloForms = SoloFormSet()
-        teamForm = TeamForm() 
+        teamForm = TeamForm()
 
     return render(req, 'forms/quick.html', {'teamForm': teamForm, 'soloForms': soloForms})
+
 
 def login(req):
     """
