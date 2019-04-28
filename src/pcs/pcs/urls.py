@@ -27,5 +27,13 @@ urlpatterns = [
     path('login/', regViews.login, name='login'),
     path('logout/', regViews.logout, name='logout'),
     path('profile/', regViews.profile, name='profile'),
-    path('checkin/', checkViews.emailCheckin, name='checkin'),
+    path('profile/manage', regViews.manage, name='manage'),
+    path('profile/courses', regViews.courses, name='courses'),
+    path('profile/options', regViews.options, name='options'),
+    path('checkin/', checkViews.swipeCheckin, name='checkin'),
+    path('emailcheckin/', checkViews.emailCheckin, name='emailcheckin'),
+    path('createcsv/', TemplateView.as_view(
+        template_name='createCSV.html'), name='createcsv'),
+    path('teamcsv/', regViews.teamcsv, name='teamcsv'),
+    path('accountscsv/', regViews.accountscsv, name='accountscsv'),
 ]

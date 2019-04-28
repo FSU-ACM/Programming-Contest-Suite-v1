@@ -12,6 +12,9 @@ from registration.utility.auth import getUser
 from registration.utility.register import addAccount, addTeam
 from registration.forms.solo import SoloForm
 from registration.forms.team import TeamForm
+from registration.models import Account, Team, Course
+from registration.utility.resources import ExportCSV
+
 
 def register(req):
     """
@@ -87,12 +90,12 @@ def login(req):
             user = getUser(req.POST)
             req.session.set_expiry(0)
             req.session['a_id'] = user.AccountID
-            return HttpResponseRedirect('/profile')
-
+            return HttpResponseRedirect('/profile/options')
     else:
         form = LoginForm()
 
     return render(req, 'login.html', {'form': form})
+
 
 def logout(req):
     """
@@ -105,6 +108,7 @@ def logout(req):
         pass
     return HttpResponseRedirect('/')
 
+
 def profile(req):
     """
     if req.method == 'POST':
@@ -112,4 +116,97 @@ def profile(req):
     else:
         form = ProfileForm()
     """
-    return render(req, 'home.html')
+    user = Account.objects.get(AccountID=req.session['a_id'])
+    team = Team.objects.get(TeamID=user.Team_id)
+    course = Course.objects.filter(account=user.AccountID)
+    courses = {}
+    courseList = list()
+    for i in course:
+        courses[i.CourseID] = i.CourseName
+        courseList.append(i.CourseName)
+
+    userInfo = {
+        'FirstName': user.FirstName,
+        'LastName': user.LastName,
+        'Email': user.Email,
+        'TeamName': team.TeamName,
+        'Courses': courses,
+        'CourseList': courseList
+    }
+    return render(req, 'profile.html', {'userInfo': userInfo})
+
+
+def manage(req):
+    user = Account.objects.get(AccountID=req.session['a_id'])
+    team = Team.objects.get(TeamID=user.Team_id)
+    course = Course.objects.filter(account=user.AccountID)
+    courses = {}
+    courseList = list()
+    for i in course:
+        courses[i.CourseID] = i.CourseName
+        courseList.append(i.CourseName)
+
+    userInfo = {
+        'FirstName': user.FirstName,
+        'LastName': user.LastName,
+        'Email': user.Email,
+        'TeamName': team.TeamName,
+        'Courses': courses,
+        'CourseList': courseList
+    }
+    return render(req, 'manage.html', {'userInfo': userInfo})
+
+
+def courses(req):
+    user = Account.objects.get(AccountID=req.session['a_id'])
+    team = Team.objects.get(TeamID=user.Team_id)
+    course = Course.objects.filter(account=user.AccountID)
+    courses = {}
+    courseList = list()
+    for i in course:
+        courses[i.CourseID] = i.CourseName
+        courseList.append(i.CourseName)
+
+    userInfo = {
+        'FirstName': user.FirstName,
+        'LastName': user.LastName,
+        'Email': user.Email,
+        'TeamName': team.TeamName,
+        'Courses': courses,
+        'CourseList': courseList
+    }
+    return render(req, 'courses.html', {'userInfo': userInfo})
+    
+
+
+def options(req):
+    user = Account.objects.get(AccountID=req.session['a_id'])
+    team = Team.objects.get(TeamID=user.Team_id)
+    course = Course.objects.filter(account=user.AccountID)
+    courses = {}
+    courseList = list()
+    for i in course:
+        courses[i.CourseID] = i.CourseName
+        courseList.append(i.CourseName)
+
+    userInfo = {
+        'FirstName': user.FirstName,
+        'LastName': user.LastName,
+        'Email': user.Email,
+        'TeamName': team.TeamName,
+        'Courses': courses,
+        'CourseList': courseList
+    }
+    return render(req, 'options.html', {'userInfo': userInfo})
+
+
+def teamcsv(req):
+    if req.method == 'GET':
+        ExportCSV("Team")
+        return HttpResponseRedirect('/createcsv')
+
+
+def accountscsv(req):
+    if req.method == 'GET':
+        ExportCSV("Accounts")
+    return HttpResponseRedirect('/createcsv')

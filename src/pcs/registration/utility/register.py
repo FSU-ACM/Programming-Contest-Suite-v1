@@ -5,6 +5,7 @@ Register Utility
 
 from bcrypt import hashpw, gensalt
 from registration.models import Account, Team
+from registration.utility.passgen import makePassword
 
 def addAccount(userInfo):
     user = Account(
@@ -23,6 +24,7 @@ def addTeam(teamInfo, leaderID, members):
     team = Team(
         TeamName=teamInfo['TeamName'],
         Division=teamInfo['Division'],
+        Password=makePassword(),
         Leader_id=leaderID
     )
 
