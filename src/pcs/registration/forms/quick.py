@@ -68,7 +68,7 @@ class QuickForm(forms.Form):
             newTeam = Team(
                 TeamName=req['TeamName'],
                 Division=req['Division'],
-                Password=passgen.makePassword()
+                Password=passgen.makePassword(),
                 Leader_id=newUser.AccountID
             )
 
