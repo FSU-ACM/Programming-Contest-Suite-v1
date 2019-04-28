@@ -11,7 +11,7 @@ def sendEmail(User):
     contestAddress = 'domjudge.cs.fsu.edu'
     team = Team.objects.get(TeamID=User.Team)
     mail_subject = 'Your DOMJudge Credentials'
-    message = User.FirstName + ',\n'+'\tYou are checked-in to the contest!'+' To log into DOMJudge, go to ' + contestAddress +' and enter the credentials below. Thanks for participating!\n\n'+'Username: ' + Team.TeamName + '\n' +'Password: ' + Team.Password
+    message = User.FirstName + str(',\n')+str('\tYou are checked-in to the contest!')+str(' To log into DOMJudge, go to ') + str(contestAddress) +str(' and enter the credentials below. Thanks for participating!\n\n')+str('Username: ') + str(Team.TeamName) + str('\n') +str('Password: ') + str(Team.Password)
     to_email = user.Email
     email = EmailMessage(
                 mail_subject, message, to=[to_email]
