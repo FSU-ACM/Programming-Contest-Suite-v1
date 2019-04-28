@@ -4,7 +4,7 @@ Registration App Views
 """
 
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.forms import formset_factory
 from registration.utility.auth import getUser
 from registration.utility.register import addAccount, addTeam
@@ -25,13 +25,15 @@ def register(req):
     - GET:
         * render blank quick register form 
     """
-    SoloFormSet = formset_factory(SoloForm, extra=3, max_num=3, validate_min=1, validate_max=3)
+    SoloFormSet = formset_factory(SoloForm, extra=3, max_num=3)
     if req.method == 'POST':
         soloForms = SoloFormSet(req.POST)
         teamForm = TeamForm(req.POST)
-        if soloForms.is_valid() and teamForm.is_valid() and teamForm.reclean(teamForm.cleaned_data):
+        vald = True
+        if not teamForm.is_valid() or not teamForm.reclean(teamForm.cleaned_data):
+            valid = False
+        if soloForms.is_valid():
             info = soloForms.cleaned_data
-            valid = True
             for i,form in enumerate(soloForms):
                 if form.is_valid() and info[i]:
                     if not form.reclean(info[i]):
