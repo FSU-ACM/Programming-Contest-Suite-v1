@@ -1,10 +1,11 @@
 """
 Registration App Views
-- assess and handle requests based on source of request and content of its data 
+- assess and handle requests based on source of request
+  and content of its data
 """
 
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.forms import formset_factory
 from registration.utility.auth import getUser
 from registration.utility.register import addAccount, addTeam
@@ -21,15 +22,18 @@ def register(req):
     - POST:
         * bind form data
         * validate form data
-        * render login page upon successful registration, raise error otherwise
+        * render login page upon successful registration,
+          raise error otherwise
     - GET:
-        * render blank quick register form 
+        * render blank quick register form
     """
-    SoloFormSet = formset_factory(SoloForm, extra=3, max_num=3, validate_min=1, validate_max=3)
+    SoloFormSet = formset_factory(
+        SoloForm, extra=3, max_num=3, validate_min=1, validate_max=3)
     if req.method == 'POST':
         soloForms = SoloFormSet(req.POST)
         teamForm = TeamForm(req.POST)
-        if soloForms.is_valid() and teamForm.is_valid() and teamForm.reclean(teamForm.cleaned_data):
+        if soloForms.is_valid() and teamForm.is_valid() and teamForm.reclean(
+                teamForm.cleaned_data):
             info = soloForms.cleaned_data
             valid = True
             for i, form in enumerate(soloForms):
@@ -69,7 +73,8 @@ def register(req):
         soloForms = SoloFormSet()
         teamForm = TeamForm()
 
-    return render(req, 'forms/quick.html', {'teamForm': teamForm, 'soloForms': soloForms})
+    return render(req, 'forms/quick.html', {
+        'teamForm': teamForm, 'soloForms': soloForms})
 
 
 def login(req):
@@ -81,7 +86,7 @@ def login(req):
         * authenticate user
         * create session for user; attach account ID
         * render profile page upon successful login, raise error otherwise
-    - GET: 
+    - GET:
         * render blank login form
     """
     if req.method == 'POST':
