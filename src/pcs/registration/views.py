@@ -41,6 +41,8 @@ def register(req):
                 if form.is_valid() and info[i]:
                     if not form.reclean(info[i]):
                         valid = False
+        else:
+            valid = False
 
         if valid:
             teamInfo = teamForm.cleaned_data
