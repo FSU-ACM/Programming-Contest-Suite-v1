@@ -31,12 +31,13 @@ def register(req):
     if req.method == 'POST':
         soloForms = SoloFormSet(req.POST)
         teamForm = TeamForm(req.POST)
-        vald = True
-        if not teamForm.is_valid() or not teamForm.reclean(teamForm.cleaned_data):
+        valid = True
+        if not teamForm.is_valid() or not teamForm.reclean(
+                teamForm.cleaned_data):
             valid = False
         if soloForms.is_valid():
             info = soloForms.cleaned_data
-            for i,form in enumerate(soloForms):
+            for i, form in enumerate(soloForms):
                 if form.is_valid() and info[i]:
                     if not form.reclean(info[i]):
                         valid = False
