@@ -10,9 +10,21 @@ class emailCheckinForm(forms.Form):
         attrs={'placeholder': 'Email'}))
 
     def validUser(self, req):
+        errors = {}
         # userExists will check that user is in db
         # if they don't match or are not in the db an error will
         # display and the user will have to try again.
+        try:
+            user = Account.objects.get(FsuNum=req['fsuNum'])
+            user.isCheckedIn = True
+            user.save()
+            return True
+        except ObjectDoesNotExist:
+            errors['fsuNum'] = 'Check-in failed'
+            self.add_error(None, errors)
+            return False
+
+
         if auth.userExists(req):
             # mark user at checked in
             user = auth.getUser(req)
@@ -21,6 +33,5 @@ class emailCheckinForm(forms.Form):
             return True
 
         else:
+            errors['Email'] = 'Check-in failed'
             return False
-            #raise ValidationError(
-                #('This email '), code='notexits')
