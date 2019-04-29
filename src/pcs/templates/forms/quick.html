@@ -2,6 +2,12 @@
 {% load crispy_forms_tags %}
 
 {% block quickform %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css"></script>
+
 <form noValidate method="post">
     {{ soloForms.management_form }}
     {% csrf_token %}
@@ -33,6 +39,11 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-12 mb-0">
+            {{ form.Courses }}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12 mb-0">
             {{ form.Email | as_crispy_field }}
         </div>
     </div>
@@ -44,4 +55,62 @@
     {% endfor %}
     <button type="submit" class="btn btn-lg btn-outline-danger btn-block">Register</button>
 </form>
+    
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('select').css('display', 'none');
+        
+        $('#id_form-0-Courses').multiselect({
+            nonSelectedText: 'Select Extra Credit Courses',
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true,
+            buttonWidth: '100%',
+            maxHeight: 200,
+            templates: {
+                button: '<button type="button" class="multiselect dropdown-toggle btn btn-outline-danger col-md-12" data-toggle="dropdown"></button>',
+                ul: '<ul class="multiselect-container dropdown-menu col-md-12"></ul>',
+                filter: '<li class="multiselect-item filter"><div class="input-group col-md-12"><span class="input-group-addon m-2"><i class="fas fa-search"></i></span><input class="form-control multiselect-search mr-2" type="text"></div></li>',
+                filterClearBtn: '<span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter" type="button"><i class="far fa-times-circle"></i></button></span>',
+                li: '<li class="col-md-12"><a href="javascript:void(0);"><label></label></a></li>',
+                divider: '<li class="multiselect-item divider"></li>',
+                liGroup: '<li class="multiselect-item group"><label class="multiselect-group"></label></li>'
+            }
+        });
+
+        $('#id_form-1-Courses').multiselect({
+            nonSelectedText: 'Select Extra Credit Courses',
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true,
+            buttonWidth: '100%',
+            maxHeight: 200,
+            templates: {
+                button: '<button type="button" class="multiselect dropdown-toggle btn btn-outline-danger col-md-12" data-toggle="dropdown"></button>',
+                ul: '<ul class="multiselect-container dropdown-menu col-md-12"></ul>',
+                filter: '<li class="multiselect-item filter"><div class="input-group col-md-12"><span class="input-group-addon m-2"><i class="fas fa-search"></i></span><input class="form-control multiselect-search mr-2" type="text"></div></li>',
+                filterClearBtn: '<span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter" type="button"><i class="far fa-times-circle"></i></button></span>',
+                li: '<li class="col-md-12"><a href="javascript:void(0);"><label></label></a></li>',
+                divider: '<li class="multiselect-item divider"></li>',
+                liGroup: '<li class="multiselect-item group"><label class="multiselect-group"></label></li>'
+            }
+        });
+
+        $('#id_form-2-Courses').multiselect({
+            nonSelectedText: 'Select Extra Credit Courses',
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true,
+            buttonWidth: '100%',
+            maxHeight: 200,
+            templates: {
+                button: '<button type="button" class="multiselect dropdown-toggle btn btn-outline-danger col-md-12" data-toggle="dropdown"></button>',
+                ul: '<ul class="multiselect-container dropdown-menu col-md-12"></ul>',
+                filter: '<li class="multiselect-item filter"><div class="input-group col-md-12"><span class="input-group-addon m-2"><i class="fas fa-search"></i></span><input class="form-control multiselect-search mr-2" type="text"></div></li>',
+                filterClearBtn: '<span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter" type="button"><i class="far fa-times-circle"></i></button></span>',
+                li: '<li class="col-md-12"><a href="javascript:void(0);"><label></label></a></li>',
+                divider: '<li class="multiselect-item divider"></li>',
+                liGroup: '<li class="multiselect-item group"><label class="multiselect-group"></label></li>'
+            }
+        });
+    });
+</script>
+
 {% endblock %}
