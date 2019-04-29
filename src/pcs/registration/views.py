@@ -208,19 +208,60 @@ def options(req):
     return render(req, 'options.html', {'userInfo': userInfo})
 
 
-def teamcsv(req):
+def delete(req):
+    user = Account.objects.get(AccountID=req.session['a_id'])
+    team = Team.objects.get(TeamID=user.Team_id)
+    course = Course.objects.filter(account=user.AccountID)
+    courses = {}
+    courseList = list()
+    for i in course:
+        courses[i.CourseID] = i.CourseName
+        courseList.append(i.CourseName)
+
+    userInfo = {
+        'FirstName': user.FirstName,
+        'LastName': user.LastName,
+        'Email': user.Email,
+        'TeamName': team.TeamName,
+        'Courses': courses,
+        'CourseList': courseList
+    }
+
+    if req.method == 'POST':
+        if user.AccountID == team.Leader_id and team.Count > 1:
+            pass
+        elif user.AccountID == team.Leader_id and team.Count == 1:
+            Account.objects.filter(AccountID=req.session['a_id']).delete()
+            Team.objects.filter(TeamID=user.Team_id).delete()
+            try:
+                del req.session['a_id']
+            except KeyError:
+                pass
+            return HttpResponseRedirect('/')
+        else:
+            Account.objects.filter(AccountID=req.session['a_id']).delete()
+            try:
+                del req.session['a_id']
+            except KeyError:
+                pass
+            return HttpResponseRedirect('/')
+
+    return render(req, 'delete.html', {'userInfo': userInfo})
+
+
+def teamtsv(req):
     """
-    Creates teams.csv on server drive for use with DomJudge.
+    Creates teams.tsv on server drive for use with DomJudge.
     """
     if req.method == 'GET':
         ExportCSV("Team")
-        return HttpResponseRedirect('/createcsv')
+        return HttpResponseRedirect('/createtsv')
 
 
-def accountscsv(req):
+def accountstsv(req):
     """
-    Creates accounts.csv on server drive.
+    Creates accounts.tsv on server drive.
     """
     if req.method == 'GET':
         ExportCSV("Accounts")
-    return HttpResponseRedirect('/createcsv')
+    return HttpResponseRedirect('/createtsv')

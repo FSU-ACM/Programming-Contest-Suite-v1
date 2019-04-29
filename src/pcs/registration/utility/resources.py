@@ -10,7 +10,7 @@ class AccountResource(resources.ModelResource):
 class TeamResource(resources.ModelResource):
     class Meta:
         model = Team
-        fields = ('TeamName', 'Password')
+        fields = ('TeamID', 'Division', 'TeamName', 'Password')
 
 
 def ExportCSV(choice):
@@ -23,10 +23,10 @@ def ExportCSV(choice):
     """
     if choice == "Team":
         dataset = TeamResource().export()
-        file = open("teams.csv", "w")
+        file = open("teams.tsv", "w")
     else:
         dataset = AccountResource().export()
-        file = open("accounts.csv", "w")
+        file = open("accounts.tsv", "w")
 
-    file.write(dataset.csv)
+    file.write(dataset.tsv)
     file.close

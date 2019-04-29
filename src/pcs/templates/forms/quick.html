@@ -9,25 +9,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css"></script>
 
 <form noValidate method="post">
-    {{ soloForms.management_form }}
-    {% csrf_token %}
-    <div class="form-row">
-        <div class="form-group col-md-8 mb-0">
-            {{ teamForm.TeamName | as_crispy_field }}
-        </div>
-        <div class="form-group col-md-4 mb-0">
-            {{ teamForm.Division | as_crispy_field }}
-        </div>
+  {{ soloForms.management_form }}
+  {% csrf_token %}
+  <div class="form-row">
+    <div class="form-group col-md-8 mb-0">
+      {{ teamForm.TeamName | as_crispy_field }}
     </div>
-    {% for form in soloForms.forms %}
-    <h4 class="pt-5">Member</h3>
-    <div class="form-row">
-        <div class="form-group col-md-6 mb-0">
-            {{ form.FirstName | as_crispy_field }}
-        </div>
-        <div class="form-group col-md-6 mb-0">
-            {{ form.LastName | as_crispy_field }}
-        </div>
+    <div class="form-group col-md-4 mb-0">
+      {{ teamForm.Division | as_crispy_field }}
     </div>
     <div class="form-row">
         <div class="form-group col-md-6 mb-0">

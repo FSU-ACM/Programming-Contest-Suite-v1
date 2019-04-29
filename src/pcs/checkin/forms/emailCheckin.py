@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from registration.models import Account
 from registration.utility import auth
 
+
 class emailCheckinForm(forms.Form):
     Email = forms.EmailField(widget=forms.EmailInput(
         attrs={'placeholder': 'Email'}),

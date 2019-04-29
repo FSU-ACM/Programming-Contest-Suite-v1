@@ -2,8 +2,8 @@
 {% block content %}
 
 <!--
-    Two buttons to export the chosen CSV file.
-    They call functions in the teamcsv and accountcsv views.py file.
+    Two buttons to export the chosen TSV file.
+    They call functions in the teamtsv and accounttsv views.py file.
     Future update should implement a download via browser feature.
 -->
 
@@ -13,19 +13,19 @@
     <div class="row mt-5">
       <div class="col-md-4 m-auto p-2">
 
-        <form action="{% url 'teamcsv' %}">
+        <form action="{% url 'teamtsv' %}">
           <input type="submit"
                  class="btn btn-lg btn-outline-danger btn-block btn-alt"
-                 value="Team CSV" />
+                 value="Team TSV" />
         </form>
 
       </div>
 
       <div class="col-md-4 m-auto p-2">
-        <form action="{% url 'accountscsv' %}">
+        <form action="{% url 'accountstsv' %}">
           <input type="submit"
                  class="btn btn-lg btn-outline-danger btn-block btn-alt"
-                 value="Accounts CSV" />
+                 value="Accounts TSV" />
         </form>
       </div>
     </div>

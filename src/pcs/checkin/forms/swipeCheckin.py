@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from registration.models import Account
 from registration.utility import auth
 
+
 class swipeCheckinForm(forms.Form):
     FsuNum = forms.CharField(widget=forms.TextInput(
         attrs={'placeholder': 'FSU Number'}),
