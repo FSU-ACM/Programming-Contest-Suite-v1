@@ -224,6 +224,26 @@ def delete(req):
         'Courses': courses,
         'CourseList': courseList
     }
+
+    if req.method == 'POST':
+        if user.AccountID == team.Leader and team.Count > 1:
+            
+        elif user.AccountID == team.Leader and team.Count == 1:
+            Account.objects.filter(AccountID=req.session['a_id']).delete()
+            Team.objects.filter(TeamID=user.Team_id).delete()
+            try:
+                del req.session['a_id']
+            except KeyError:
+                pass
+            return HttpResponseRedirect('/')
+        else
+            Account.objects.filter(AccountID=req.session['a_id']).delete()
+            try:
+                del req.session['a_id']
+            except KeyError:
+                pass
+            return HttpResponseRedirect('/')
+
     return render(req, 'delete.html', {'userInfo': userInfo})
 
 
