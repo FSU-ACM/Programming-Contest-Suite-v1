@@ -29,7 +29,7 @@ class LoginForm(forms.Form):
         if not loginErrors:
             return True
         else:
-            self.add_errors(None, loginErrors)
+            self.add_error(None, loginErrors)
             return False
         
 
