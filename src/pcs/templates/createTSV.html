@@ -1,0 +1,35 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<!--
+    Two buttons to export the chosen TSV file.
+    They call functions in the teamtsv and accounttsv views.py file.
+    Future update should implement a download via browser feature.
+-->
+
+<div class="container col-md-8 rounded-lg py-5">
+  <div class="jumbotron">
+
+    <div class="row mt-5">
+      <div class="col-md-4 m-auto p-2">
+
+        <form action="{% url 'teamtsv' %}">
+          <input type="submit"
+                 class="btn btn-lg btn-outline-danger btn-block btn-alt"
+                 value="Team TSV" />
+        </form>
+
+      </div>
+
+      <div class="col-md-4 m-auto p-2">
+        <form action="{% url 'accountstsv' %}">
+          <input type="submit"
+                 class="btn btn-lg btn-outline-danger btn-block btn-alt"
+                 value="Accounts TSV" />
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock%}

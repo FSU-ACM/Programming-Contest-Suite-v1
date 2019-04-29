@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block home %}
+
+<div class="container col-md-8 rounded-lg py-5">
+  <div class="jumbotron">
+
+    <div class="row mx-5">
+      <h3>ACM's Programming Contest </h3>
+      <p>
+        The ACM Programming Contest is a coding competition that emphasizes
+        problem solving executed in code. Students, faculty, and staff from all
+        majors and colleges are welcome. The problems are ICPC style coding
+        questions which are similar to questions asked by recruiters during
+        technical interviews.
+        
+        <br />
+        <br />
+        
+        The competition lasts 5 hours, and teams are limited to 3 members. The
+        top teams from each division receive prizes, which have previously included
+        things like Google Home Minis, Amazon Echoes, Raspberry Pies, Chromecasts,
+        and ACM chapter t-shirts.
+      </p>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-md-4 m-auto p-2">
+
+        <form action="{% url 'register' %}">
+          <input type="submit"
+                 class="btn btn-lg btn-outline-danger btn-block btn-alt"
+                 value="Register" />
+        </form>
+
+      </div>
+      <div class="col-md-4 m-auto p-2">
+        <form action="{% url 'login' %}">
+          <input type="submit"
+                 class="btn btn-lg btn-outline-danger btn-block btn-alt"
+                 value="Login" />
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

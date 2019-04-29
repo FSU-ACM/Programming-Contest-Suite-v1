@@ -16,9 +16,25 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
+from registration import views as regViews
+from checkin import views as checkViews
+
 
 urlpatterns = [
-    path('registration/', include('registration.urls')),
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='base.html'), name='home')
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('register/', regViews.register, name='register'),
+    path('login/', regViews.login, name='login'),
+    path('logout/', regViews.logout, name='logout'),
+    # path('profile/', regViews.profile, name='profile'),
+    path('profile/manage', regViews.manage, name='manage'),
+    path('profile/courses', regViews.courses, name='courses'),
+    path('profile/options', regViews.options, name='options'),
+    path('profile/delete', regViews.delete, name='delete'),
+    path('checkin/', checkViews.swipeCheckin, name='checkin'),
+    path('emailcheckin/', checkViews.emailCheckin, name='emailcheckin'),
+    path('createtsv/', TemplateView.as_view(
+        template_name='createTSV.html'), name='createTsv'),
+    path('teamcsv/', regViews.teamtsv, name='teamtsv'),
+    path('accountscsv/', regViews.accountstsv, name='accountstsv'),
 ]
