@@ -14,7 +14,7 @@ from registration.forms.team import TeamForm
 from registration.forms.login import LoginForm
 from registration.models import Account, Team, Course
 from registration.utility.resources import ExportCSV
-
+from registration.utility.fields import *
 
 def register(req):
     """
@@ -49,14 +49,15 @@ def register(req):
             userInfo1 = info[0]
             userInfo2 = info[1]
             userInfo3 = info[2]
-            members = {'1': userInfo1.__str__()}
+            members = list(userInfo1.__str__())
             user1 = addAccount(userInfo1)
 
             if userInfo2:
-                members['2'] = userInfo2.__str__()
+                members.append(userInfo2.__str__())
                 user2 = addAccount(userInfo2)
+                
             if userInfo3:
-                members['3'] = userInfo3.__str__()
+                members.append(userInfo3.__str__())
                 user3 = addAccount(userInfo3)
 
             team = addTeam(teamInfo, user1.AccountID, members)
@@ -75,6 +76,7 @@ def register(req):
     else:
         soloForms = SoloFormSet()
         teamForm = TeamForm()
+
 
     return render(req, 'forms/quick.html', {'teamForm': teamForm, 'soloForms': soloForms})
 
