@@ -44,6 +44,7 @@ class Team(models.Model):
     Division = models.CharField(max_length=1, choices=DIVISION)
     Password = models.CharField(max_length=60)
     Members = models.CharField(max_length=150)
+    MemberIDs = models.CharField(max_length=30, null=True)
     Count = models.IntegerField(default=1)
     Leader = models.OneToOneField('Account', on_delete=models.SET_NULL, null=True)
 
@@ -72,6 +73,7 @@ class Account(models.Model):
     Password = models.CharField(max_length=250)
     isCheckedIn = models.BooleanField(default=False)
     Team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True)
-    course_id = models.ManyToManyField(Course)
+    course = models.ManyToManyField(Course)
+    
     def __str__(self):
-        return str(self.FirstName, ' ', self.LastName)
+        return (str(self.FirstName) + ' ' + str(self.LastName))

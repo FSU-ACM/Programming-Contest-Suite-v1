@@ -49,18 +49,28 @@ def register(req):
             userInfo1 = info[0]
             userInfo2 = info[1]
             userInfo3 = info[2]
-            members = list(userInfo1.__str__())
+            members = []
+            memID = []
             user1 = addAccount(userInfo1)
+            members.append(user1.__str__())
+            memID.append(user1.AccountID)
+            numMembers = 1
 
             if userInfo2:
-                members.append(userInfo2.__str__())
                 user2 = addAccount(userInfo2)
-                
-            if userInfo3:
-                members.append(userInfo3.__str__())
-                user3 = addAccount(userInfo3)
+                members.append(user2.__str__())
+                memID.append(user2.AccountID)
+                numMembers=2
 
-            team = addTeam(teamInfo, user1.AccountID, members)
+            if userInfo3:
+                user3 = addAccount(userInfo3)
+                members.append(user3.__str__())
+                memID.append(user3.AccountID)
+                numMembers=3
+
+            memInfo = zip(memID, members)
+            
+            team = addTeam(teamInfo, user1.AccountID, memInfo, numMembers)
             user1.Team_id = team.TeamID
             user1.save()
 
