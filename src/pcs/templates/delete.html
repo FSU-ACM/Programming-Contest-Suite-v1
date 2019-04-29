@@ -14,7 +14,8 @@
 
 <div class="row mx-5">
   <div class="col-md-4 m-auto p-2">
-    <form action="{% url 'options' %}">
+    <form noValidate method="post">
+      {% csrf_token %}
       <input type="submit"
              class="btn btn-lg btn-outline-danger btn-block btn-alt"
              value="Delete Account" />

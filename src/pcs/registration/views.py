@@ -245,7 +245,8 @@ def delete(req):
             except KeyError:
                 pass
             return HttpResponseRedirect('/')
-
+    else:
+        pass
     return render(req, 'delete.html', {'userInfo': userInfo})
 
 
