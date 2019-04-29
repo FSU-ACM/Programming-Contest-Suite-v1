@@ -255,6 +255,24 @@ def delete(req):
             Account.objects.filter(AccountID=req.session['a_id']).delete()
             Team.objects.filter(TeamID=user.Team_id).delete()
 
+        elif user.AccountID != team.Leader_id and team.Count > 1:
+            if team.Count ==2:
+                leader, member1 = team.MemberIDs.split(',')
+                team.memberIDs = ''
+                team.memberIDs = leader
+                #team.Count -= 1
+                #team.save()
+            else:
+                leader, member1, member2 = team.MemberIDs.split(',')
+                team.memberIDs = ''
+                if user.accountID == member1:
+                    team.memberIDs = str(leader)+str(',')+str(member2)
+                elif user.AccountID == member2:
+                    team.memberIDs = str(leader)+str(',')+str(member1)
+
+            Account.objects.filter(AccountID=req.session['a_id']).delete()
+            team.Count -= 1
+            team.save()
         else:
             Account.objects.filter(AccountID=req.session['a_id']).delete()
 
