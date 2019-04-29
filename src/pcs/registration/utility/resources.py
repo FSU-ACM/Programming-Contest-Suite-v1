@@ -1,5 +1,4 @@
 from import_export import resources
-
 from registration.models import Account, Team
 
 
