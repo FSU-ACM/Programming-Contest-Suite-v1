@@ -18,7 +18,7 @@ def addAccount(userInfo):
         Password=hashpw(str(userInfo['Password']).encode(), gensalt()).decode(),
     )
     user.save()
-    
+
     if 'Courses' in userInfo.keys():
         for x in userInfo['Courses']:
             course = Course.objects.get(CourseID=x)

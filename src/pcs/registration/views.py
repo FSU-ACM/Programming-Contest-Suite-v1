@@ -239,22 +239,53 @@ def delete(req):
 
     if req.method == 'POST':
         if user.AccountID == team.Leader_id and team.Count > 1:
-            pass
+            if team.Count == 2:
+                leader, member1 = team.MemberIDs.split(',')
+                team.memberIDs = ''
+                team.memberIDs = member1
+                team.Count -= 1
+                team.Leader_id = member1
+                Account.objects.filter(AccountID=req.session['a_id']).delete()
+            else:
+                leader, member1, member2 = team.MemberIDs.split(',')
+                team.memberIDs = ''
+                team.memberIDs = str(member1)+str(',')+str(member2)
+                team.Count -= 1
+                team.Leader_id = member1
+                Account.objects.filter(AccountID=req.session['a_id']).delete()
+            team.save()
+
         elif user.AccountID == team.Leader_id and team.Count == 1:
             Account.objects.filter(AccountID=req.session['a_id']).delete()
             Team.objects.filter(TeamID=user.Team_id).delete()
-            try:
-                del req.session['a_id']
-            except KeyError:
-                pass
-            return HttpResponseRedirect('/')
+
+        elif user.AccountID != team.Leader_id and team.Count > 1:
+            if team.Count ==2:
+                leader, member1 = team.MemberIDs.split(',')
+                team.memberIDs = ''
+                team.memberIDs = leader
+                #team.Count -= 1
+                #team.save()
+            else:
+                leader, member1, member2 = team.MemberIDs.split(',')
+                team.memberIDs = ''
+                if user.accountID == member1:
+                    team.memberIDs = str(leader)+str(',')+str(member2)
+                elif user.AccountID == member2:
+                    team.memberIDs = str(leader)+str(',')+str(member1)
+
+            Account.objects.filter(AccountID=req.session['a_id']).delete()
+            team.Count -= 1
+            team.save()
         else:
             Account.objects.filter(AccountID=req.session['a_id']).delete()
-            try:
-                del req.session['a_id']
-            except KeyError:
-                pass
-            return HttpResponseRedirect('/')
+
+        try:
+            del req.session['a_id']
+        except KeyError:
+            pass
+        return HttpResponseRedirect('/')
+
     else:
         pass
     return render(req, 'delete.html', {'userInfo': userInfo})
