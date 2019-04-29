@@ -1,11 +1,10 @@
 from django import forms
-from django.core.exceptions import ValidationError
 from bcrypt import hashpw, gensalt
 from registration.utility.auth import userExists
 from registration.utility.validators import *
 from registration.models import Account
 
-#class CourseField(forms):
+#class CourseField(forms.MultiValueField):
 
 class SoloForm(forms.Form):
     FirstName = forms.CharField(
@@ -32,8 +31,20 @@ class SoloForm(forms.Form):
 
     Email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
     Password = forms.CharField(widget=forms.PasswordInput())
-        
+    
     Role = forms.ChoiceField(widget=forms.RadioSelect(), choices=Account.ROLE, required=False)
+    course = (
+        ('1', 'COP4530'),
+        ('2', 'COP4531'),
+        ('3', 'COP3330')
+    )
+
+    Courses = forms.TypedMultipleChoiceField(
+        widget=forms.SelectMultiple(),
+        label='Extra Credit Courses',
+        choices=course,
+        required=False
+    )
     
     def reclean(self, fields):
         soloErrors = {}
