@@ -27,7 +27,7 @@ def emailCheckin(req):
         form = emailCheckinForm(req.POST)
         if form.is_valid() and form.validUser(req.POST):
             User = Account.objects.get(Email=req.POST['Email'])
-            #sendEmail(User)
+            sendEmail(User)
             return render(req, 'checkinSuccess.html')
     else:
         form = emailCheckinForm()
@@ -42,7 +42,7 @@ def swipeCheckin(req):
         form = swipeCheckinForm(req.POST)
         if form.is_valid() and form.validUser(req.POST.copy()):
             User = Account.objects.get(FsuNum=form.parse(req.POST))
-            #sendEmail(User)
+            sendEmail(User)
             return render(req, 'checkinSuccess.html')
     else:
         form = swipeCheckinForm()

@@ -20,12 +20,17 @@ def addAccount(userInfo):
 
     user.save()
     return user
-    
-def addTeam(teamInfo, leaderID, members):
+
+def addTeam(teamInfo, leaderID, memInfo, numMembers=1):
+    members, memID = zip(*memInfo)
+
+
     team = Team(
         TeamName=teamInfo['TeamName'],
         Division=teamInfo['Division'],
-        Members=reduce((lambda x,y: x+'\n'+y), members),
+        Members=reduce((lambda x,y: x+'\n'+y), list(members)),
+        MemberIDs=reduce((lambda x,y: str(x)+','+str(y)), list(memID)),
+        Count=numMembers,
         Password=makePassword(),
         Leader_id=leaderID
     )

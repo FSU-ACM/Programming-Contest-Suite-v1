@@ -44,6 +44,7 @@ class Team(models.Model):
     Division = models.CharField(max_length=1, choices=DIVISION)
     Password = models.CharField(max_length=60)
     Members = models.CharField(max_length=150)
+    MemberIDs = models.CharField(max_length=30)
     Count = models.IntegerField(default=1)
     Leader = models.OneToOneField('Account', on_delete=models.SET_NULL, null=True)
 

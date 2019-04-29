@@ -49,18 +49,24 @@ def register(req):
             userInfo1 = info[0]
             userInfo2 = info[1]
             userInfo3 = info[2]
-            members = list(userInfo1.__str__())
             user1 = addAccount(userInfo1)
+            members = list(user1.__str__())
+            memID = list(user1.AccountID)
 
             if userInfo2:
-                members.append(userInfo2.__str__())
                 user2 = addAccount(userInfo2)
-                
-            if userInfo3:
-                members.append(userInfo3.__str__())
-                user3 = addAccount(userInfo3)
+                members.append(user2.__str__())
+                memID.append(user2.AccountID)
+                numMembers=2
 
-            team = addTeam(teamInfo, user1.AccountID, members)
+            if userInfo3:
+                user3 = addAccount(userInfo3)
+                members.append(user3.__str__())
+                memID.append(user3.AccountID)
+                numMembers=3
+
+            memInfo = zip(memID, members)
+            team = addTeam(teamInfo, user1.AccountID, memInfo, numMembers)
             user1.Team_id = team.TeamID
             user1.save()
 
@@ -229,22 +235,35 @@ def delete(req):
 
     if req.method == 'POST':
         if user.AccountID == team.Leader_id and team.Count > 1:
-            pass
+            if team.Count == 2:
+                leader, member1 = team.MemberIDs.split(',')
+                team.memberIDs = ''
+                team.memberIDs = member1
+                team.Count -= 1
+                team.Leader_id = member1
+                Account.objects.filter(AccountID=req.session['a_id']).delete()
+            else:
+                leader, member1, member2 = team.MemberIDs.split(',')
+                team.memberIDs = ''
+                team.memberIDs = str(member1)+str(',')+str(member2)
+                team.Count -= 1
+                team.Leader_id = member1
+                Account.objects.filter(AccountID=req.session['a_id']).delete()
+            team.save()
+
         elif user.AccountID == team.Leader_id and team.Count == 1:
             Account.objects.filter(AccountID=req.session['a_id']).delete()
             Team.objects.filter(TeamID=user.Team_id).delete()
-            try:
-                del req.session['a_id']
-            except KeyError:
-                pass
-            return HttpResponseRedirect('/')
+
         else:
             Account.objects.filter(AccountID=req.session['a_id']).delete()
-            try:
-                del req.session['a_id']
-            except KeyError:
-                pass
-            return HttpResponseRedirect('/')
+
+        try:
+            del req.session['a_id']
+        except KeyError:
+            pass
+        return HttpResponseRedirect('/')
+
     else:
         pass
     return render(req, 'delete.html', {'userInfo': userInfo})
