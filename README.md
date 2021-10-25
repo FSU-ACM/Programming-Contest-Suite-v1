@@ -1,2 +1,2 @@
 # ProgrammingContestSuite
-FSU Programming Contest Suite
+Django powered registration suite created for CEN4020 Sp'19
